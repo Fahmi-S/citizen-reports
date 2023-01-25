@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PetugasController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
 
 /*
@@ -14,15 +16,24 @@ use App\Http\Controllers\DashboardController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::middleware(['only_guest'])->group(function () {
+    //Login Controllers
+    Route::get('/login', [AuthController::class, 'index'])->name('login');
+    Route::post('/login', [AuthController::class, 'authenticating']);
+});
 
-Route::get('/', function () {
-    return view('welcome');
-})->middleware('auth');
-
-//Login
-Route::get('login', [AuthController::class, 'index'])->name('login');
-Route::post('login', [AuthController::class, 'authenticating']);
 
 //Dashboard
 Route::get('dashboard', [DashboardController::class, 'index']);
+
+//Logout
+Route::get('logout', [AuthController::class, 'logout']);
+
+//profile
+Route::get('profile', [ProfileController::class, 'index']);
+
+//Account Crud
+Route::get('petugas-list', [PetugasController::class, 'index']);
+Route::get('petugas-add', [PetugasController::class, 'add']);
+Route::post('petugas-add', [PetugasController::class, 'store']);
 
