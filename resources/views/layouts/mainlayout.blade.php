@@ -30,9 +30,6 @@
                 <a href="profile" class="list-group-item list-group-item-action bg-transparent second-text fw-bold fs-7">
                     <h6><li>Profile</li></h6>
                 </a>
-                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold fs-7">
-                    <h6><li>Change Password</li></h6>
-                </a>
                 {{-- garis --}}
                 <hr>
                 {{-- garis --}}
@@ -96,7 +93,7 @@
                     <h2 class="fs-2 m-0">
                         @if (request()->route()->uri == 'profile')Profile
                         @elseif (request()->route()->uri == 'dashboard')Dashboard
-                        @elseif (request()->route()->uri == 'account-manage' || request()->route()->uri == 'account-add')Account Manage
+                        @elseif (request()->route()->uri == 'petugas-list' || request()->route()->uri == 'petugas-add' || request()->route()->uri == 'petugas-deleted' || request()->route()->uri == 'petugas-edit/{slug}' || request()->route()->uri == 'petugas-delete/{slug}')Petugas Manage
                         @endif
                     </h2>
                 </div>
@@ -112,7 +109,7 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle primary-text fw-bold" href="#" id="navbarDropdown"
                                 role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="fas fa-user me-2"></i>John Doe
+                                <i class="fas fa-user me-2"></i>{{Auth::guard('admin')->user()->nama_petugas}}
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="profile">Profile</a></li>
