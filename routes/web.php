@@ -36,4 +36,11 @@ Route::get('profile', [ProfileController::class, 'index']);
 Route::get('petugas-list', [PetugasController::class, 'index']);
 Route::get('petugas-add', [PetugasController::class, 'add']);
 Route::post('petugas-add', [PetugasController::class, 'store']);
+Route::get('petugas-edit/{slug}', [PetugasController::class, 'edit']);
+Route::put('petugas-edit/{slug}', [PetugasController::class, 'update']);
+Route::get('petugas-delete/{slug}', [PetugasController::class, 'delete']);
+Route::get('petugas-destroy/{slug}', [PetugasController::class, 'destroy']);
+Route::get('petugas-deleted', [PetugasController::class, 'deletedPetugas']);
+Route::get('petugas-restore/{slug}', [PetugasController::class, 'restore']);
+
 

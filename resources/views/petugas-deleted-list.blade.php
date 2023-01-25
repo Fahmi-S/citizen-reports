@@ -1,15 +1,12 @@
 @extends('layouts.mainlayout')
 
-@section('title', 'Dashboard')
+@section('title', 'Deleted Category')
 
 @section('content')
 
 <h3 class="text-center">Petugas List</h3>
     <div class="d-flex justify-content-center">
-        <a href="petugas-add" class="btn btn-primary">+ Tambah Data</a>
-    </div>
-    <div class="d-flex justify-content-center mt-3">
-        <a href="petugas-deleted" class="btn btn-secondary">- View Deleted Data</a>
+        <a href="/petugas-list" class="btn btn-primary">- Kembali</a>
     </div>
 
     <div class="mt-5">
@@ -33,7 +30,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($petugas as $item)
+                @foreach ($deletedPetugas as $item)
                     <tr>
                         <th scope="row">{{ $loop->iteration }}</th>
                         <td>{{ $item->nama_petugas}}</td>
@@ -41,8 +38,7 @@
                         <td>{{ $item->telp }}</td>
                         <td>{{ $item->level }}</td>
                         <td>
-                            <a href="petugas-edit/{{ $item->slug }}">Edit</a>
-                            <a href="petugas-delete/{{ $item->slug }}">Delete</a>
+                            <a href="petugas-restore/{{ $item->slug }}">Restore</a>
                         </td>
                     </tr>
                 @endforeach

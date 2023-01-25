@@ -35,4 +35,52 @@ class PetugasController extends Controller
         $petugas = Petugas::create($request->all());
         return redirect('petugas-list')->with('status', 'Data Berhasil Ditambahkan!');
     }
+
+    public function edit($slug)
+    {
+        $petugas = Petugas::where('slug', $slug)->first();
+        return view('petugas-edit', ['petugas' => $petugas]);
+    }
+
+    public function update(Request $request, $slug)
+    {   
+        $validated = $request->validate([
+            'nama_petugas' => 'required',
+            'username' => 'required|max:20',
+            'password' => 'required',
+            'telp' => 'required',
+            'level' => 'required',
+        ]);
+        $request['password'] = Hash::make($request->password);
+        $petugas = Petugas::where('slug', $slug)->first();
+        $petugas->slug = null;
+        $petugas->update($request->all());
+        return redirect('petugas-list')->with('status', 'Data Berhasil Diubah!');
+    }
+
+    public function delete($slug)
+    {
+        $petugas = Petugas::where('slug', $slug)->first();
+        return view('petugas-delete', ['petugas' => $petugas]);
+    }
+
+    public function destroy($slug)
+    {
+        $petugas = Petugas::where('slug', $slug)->first();
+        $petugas->delete();
+        return redirect('petugas-list')->with('status', 'Data Berhasil Dihapus!');
+    }
+
+    public function deletedPetugas()
+    {
+        $deletedPetugas = Petugas::onlyTrashed()->get();
+        return view('petugas-deleted-list', ['deletedPetugas' => $deletedPetugas]);
+    }
+
+    public function restore($slug)
+    {
+        $petugas = Petugas::withTrashed()->where('slug', $slug)->first();
+        $petugas->restore();
+        return redirect('petugas-list')->with('status', 'Data Berhasil DiKembalikan!');
+    }
 }
