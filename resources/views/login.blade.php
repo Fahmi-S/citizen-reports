@@ -18,6 +18,15 @@
                         {{ session('message') }}
                     </div>            
                 @endif
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <div class="box shadow bg-white p-4">
                     <h3 class="mb-4 text-center fs-1">Login</h3>
                     <form action="" method="POST" class="mb-3">
