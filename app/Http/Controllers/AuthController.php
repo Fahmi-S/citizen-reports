@@ -24,9 +24,9 @@ class AuthController extends Controller
             if (Auth::guard('admin')->user()->level == 'admin'){
                 return redirect('dashboard');
             }else if(Auth::guard('admin')->user()->level == 'petugas') {
-                dd('halaman petugas');
+                return redirect('profile');
             }else if(Auth::guard('admin')->user()->level == 'masyarakat'){
-                dd('halaman masyarakat');
+                return redirect('profile');
             }
         }
         // Jika credentials/data tidak sesuai dengan yang ada di table munculkan error dan lempar kembali ke login
