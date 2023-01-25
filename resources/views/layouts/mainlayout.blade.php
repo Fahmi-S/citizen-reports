@@ -19,7 +19,7 @@
             <div class="sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase border-bottom">
                 Citizen Reports</div>
             <div class="list-group list-group-flush my-3">
-                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fs-4 text-center active">
+                <a href="dashboard" class="list-group-item list-group-item-action bg-transparent second-text fs-4 text-center active">
                     <i class="fas fa-tachometer-alt me-2"></i>Dashboard
                 </a>
                 <hr>
@@ -27,18 +27,18 @@
                 <h5 class="list-group-item list-group-item-action bg-transparent second-text fw-bold text-start active">
                     <i class="fa-solid fa-user"> USER</i>
                 </h5>
-                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold fs-7">
+                <a href="profile" class="list-group-item list-group-item-action bg-transparent second-text fw-bold fs-7">
                     <h6><li>Profile</li></h6>
                 </a>
                 <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold fs-7">
                     <h6><li>Change Password</li></h6>
                 </a>
-
+                {{-- garis --}}
                 <hr>
-
+                {{-- garis --}}
                 {{-- DATA MANAGING --}}
                 <h5 class="list-group-item list-group-item-action bg-transparent second-text fw-bold text-start active">
-                    <i class="fa-solid fa-user-shield"> Managing</i>
+                    <i class="fa-solid fa-user-shield"> Report</i>
                 </h5>
                 <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold fs-7">
                     <h6><li>Incoming Report</li></h6>
@@ -52,28 +52,53 @@
                 <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold fs-7">
                     <h6><li>Finished Report</li></h6>
                 </a>
-
+                
                 <hr>
-
-                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold fs-7 active">
-                    <h6><i class="fa-solid fa-file-pdf"> Generate Report</i></h6>
+                
+                <h5 class="list-group-item list-group-item-action bg-transparent second-text fw-bold text-start active">
+                    <i class="fa-solid fa-users"> Account</i>
+                </h5>
+                <a href="petugas-list" class="list-group-item list-group-item-action bg-transparent second-text fw-bold fs-7">
+                    <h6><li>Petugas</li></h6>
                 </a>
+                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold fs-7">
+                    <h6><li>Masyarakat</li></h6>
+                </a>
+                
 
+                {{-- garis --}}
                 <hr>
-
+                {{-- garis --}}
+                <h6 class="list-group-item list-group-item-action bg-transparent second-text fw-bold fs-7 active">
+                    <i class="fa-solid fa-file-pdf"> Generate Report</i>
+                </h6>
+                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold fs-7">
+                    <h6><li>PDF</li></h6>
+                </a>
+                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold fs-7">
+                    <h6><li>Excel</li></h6>
+                </a>
+                {{-- garis --}}
+                <hr>
+                {{-- garis --}}
                 <a href="#" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold">
                     <i class="fas fa-power-off me-2"></i>Logout
                 </a>
             </div>
         </div>
         {{-- Sidebar berhenti disini--}}
-
+        
         {{-- Page Content --}}
         <div id="page-content-wrapper">
             <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">
                 <div class="d-flex align-items-center">
                     <i class="fas fa-align-left primary-text fs-4 me-3" id="menu-toggle"></i>
-                    <h2 class="fs-2 m-0">Dashboard</h2>
+                    <h2 class="fs-2 m-0">
+                        @if (request()->route()->uri == 'profile')Profile
+                        @elseif (request()->route()->uri == 'dashboard')Dashboard
+                        @elseif (request()->route()->uri == 'account-manage' || request()->route()->uri == 'account-add')Account Manage
+                        @endif
+                    </h2>
                 </div>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -90,9 +115,9 @@
                                 <i class="fas fa-user me-2"></i>John Doe
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#">Profile</a></li>
+                                <li><a class="dropdown-item" href="profile">Profile</a></li>
                                 <li><a class="dropdown-item" href="#">Settings</a></li>
-                                <li><a class="dropdown-item" href="#">Logout</a></li>
+                                <li><a class="dropdown-item" href="logout">Logout</a></li>
                             </ul>
                         </li>
                     </ul>
