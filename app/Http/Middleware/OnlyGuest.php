@@ -19,6 +19,8 @@ class OnlyGuest
     {
         if(Auth::guard('admin')->user()){
             return redirect()->back();
+        }elseif(Auth::guard('masyarakat')->user()) {
+            return redirect()->back();
         }
         return $next($request);
     }

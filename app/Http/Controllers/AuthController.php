@@ -20,15 +20,20 @@ class AuthController extends Controller
             'password' => ['required'],
         ]);
 
+        
+
         if(Auth::guard('admin')->attempt($credentials)){
             if (Auth::guard('admin')->user()->level == 'admin'){
                 return redirect('dashboard');
             }else if(Auth::guard('admin')->user()->level == 'petugas') {
                 return redirect('profile');
-            }else if(Auth::guard('admin')->user()->level == 'masyarakat'){
-                return redirect('profile');
             }
         }
+
+        if(Auth::guard('masyarakat')->attempt($credentials)){
+            return redirect('profile');
+        }
+        
         // Jika credentials/data tidak sesuai dengan yang ada di table munculkan error dan lempar kembali ke login
         Session::flash('status', 'failed');
         Session::flash('message', 'Login Gagal / Tidak Ditemukan Data');
@@ -41,5 +46,10 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return redirect('login');
+    }
+
+    public function register()
+    {
+        return view('register');
     }
 }
