@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PetugasController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\MasyarakatController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,13 +22,14 @@ Route::middleware(['only_guest'])->group(function () {
     Route::get('/login', [AuthController::class, 'index'])->name('login');
     Route::post('/login', [AuthController::class, 'authenticating']);
 
-    Route::get('/register',[AuthController::class, 'register']);
+    Route::get('/register', [AuthController::class, 'register']);
+    Route::post('register', [AuthController::class, 'registerProcess']);
 });
 
 Route::middleware(['auth:admin,masyarakat', 'only_admin'])->group(function () {
     //Dashboard
     Route::get('dashboard', [DashboardController::class, 'index']);
-    //Account Crud
+    //Petugas Crud
     Route::get('petugas-list', [PetugasController::class, 'index']);
     Route::get('petugas-add', [PetugasController::class, 'add']);
     Route::post('petugas-add', [PetugasController::class, 'store']);
@@ -37,8 +39,17 @@ Route::middleware(['auth:admin,masyarakat', 'only_admin'])->group(function () {
     Route::get('petugas-destroy/{slug}', [PetugasController::class, 'destroy']);
     Route::get('petugas-deleted', [PetugasController::class, 'deletedPetugas']);
     Route::get('petugas-restore/{slug}', [PetugasController::class, 'restore']);
+    //Masyarakat
+    Route::get('masyarakat-list', [MasyarakatController::class, 'index']);
+    Route::get('masyarakat-add', [MasyarakatController::class, 'add']);
+    Route::post('masyarakat-add', [MasyarakatController::class, 'store']);
+    Route::get('masyarakat-edit/{slug}', [MasyarakatController::class, 'edit']);
+    Route::put('masyarakat-edit/{slug}', [MasyarakatController::class, 'update']);
+    Route::get('masyarakat-delete/{slug}', [MasyarakatController::class, 'delete']);
+    Route::get('masyarakat-destroy/{slug}', [MasyarakatController::class, 'destroy']);
+    Route::get('masyarakat-deleted', [MasyarakatController::class, 'deletedMasyarakat']);
+    Route::get('masyarakat-restore/{slug}', [MasyarakatController::class, 'restore']);
 });
-
 
 Route::middleware(['auth:admin,masyarakat'])->group(function () {
     
