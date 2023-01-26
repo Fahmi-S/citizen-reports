@@ -24,12 +24,9 @@ Route::middleware(['only_guest'])->group(function () {
     Route::get('/register',[AuthController::class, 'register']);
 });
 
-
-Route::middleware(['auth:admin,masyarakat'])->group(function () {
+Route::middleware(['auth:admin,masyarakat', 'only_admin'])->group(function () {
     //Dashboard
     Route::get('dashboard', [DashboardController::class, 'index']);
-    //profile
-    Route::get('profile', [ProfileController::class, 'index']);
     //Account Crud
     Route::get('petugas-list', [PetugasController::class, 'index']);
     Route::get('petugas-add', [PetugasController::class, 'add']);
@@ -40,6 +37,13 @@ Route::middleware(['auth:admin,masyarakat'])->group(function () {
     Route::get('petugas-destroy/{slug}', [PetugasController::class, 'destroy']);
     Route::get('petugas-deleted', [PetugasController::class, 'deletedPetugas']);
     Route::get('petugas-restore/{slug}', [PetugasController::class, 'restore']);
+});
+
+
+Route::middleware(['auth:admin,masyarakat'])->group(function () {
+    
+    //profile
+    Route::get('profile', [ProfileController::class, 'index']);
     //Logout
     Route::get('logout', [AuthController::class, 'logout']);
 

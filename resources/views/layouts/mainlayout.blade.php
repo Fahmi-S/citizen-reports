@@ -17,12 +17,21 @@
 
         <div class="bg-white" id="sidebar-wrapper">
             <div class="sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase border-bottom">
-                Citizen Reports</div>
+                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fs-4 text-center active">
+                Citizen Reports
+                </a></div>
             <div class="list-group list-group-flush my-3">
-                <a href="dashboard" class="list-group-item list-group-item-action bg-transparent second-text fs-4 text-center active">
-                    <i class="fas fa-tachometer-alt me-2"></i>Dashboard
-                </a>
-                <hr>
+                @if (Auth::guard('masyarakat')->user())
+                        
+                    @elseif(Auth::guard('admin')->user()->level == 'admin')
+                        <a href="dashboard" class="list-group-item list-group-item-action bg-transparent second-text fs-4 text-center active">
+                            <i class="fas fa-tachometer-alt me-2"></i>
+                            
+                            Dashboard
+                        </a>
+                        <hr>
+                    @endif
+                
                 {{-- USER SIDEBAR --}}
                 <h5 class="list-group-item list-group-item-action bg-transparent second-text fw-bold text-start active">
                     <i class="fa-solid fa-user"> USER</i>
@@ -30,51 +39,59 @@
                 <a href="profile" class="list-group-item list-group-item-action bg-transparent second-text fw-bold fs-7">
                     <h6><li>Profile</li></h6>
                 </a>
-                {{-- garis --}}
-                <hr>
-                {{-- garis --}}
-                {{-- DATA MANAGING --}}
-                <h5 class="list-group-item list-group-item-action bg-transparent second-text fw-bold text-start active">
-                    <i class="fa-solid fa-user-shield"> Report</i>
-                </h5>
-                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold fs-7">
-                    <h6><li>Incoming Report</li></h6>
-                </a>
-                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold fs-7">
-                    <h6><li>Processing Report</li></h6>
-                </a>
-                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold fs-7">
-                    <h6><li>Declined Report</li></h6>
-                </a>
-                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold fs-7">
-                    <h6><li>Finished Report</li></h6>
-                </a>
-                
-                <hr>
-                
-                <h5 class="list-group-item list-group-item-action bg-transparent second-text fw-bold text-start active">
-                    <i class="fa-solid fa-users"> Account</i>
-                </h5>
-                <a href="petugas-list" class="list-group-item list-group-item-action bg-transparent second-text fw-bold fs-7">
-                    <h6><li>Petugas</li></h6>
-                </a>
-                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold fs-7">
-                    <h6><li>Masyarakat</li></h6>
-                </a>
-                
 
-                {{-- garis --}}
-                <hr>
-                {{-- garis --}}
-                <h6 class="list-group-item list-group-item-action bg-transparent second-text fw-bold fs-7 active">
-                    <i class="fa-solid fa-file-pdf"> Generate Report</i>
-                </h6>
-                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold fs-7">
-                    <h6><li>PDF</li></h6>
-                </a>
-                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold fs-7">
-                    <h6><li>Excel</li></h6>
-                </a>
+                @if(Auth::guard('masyarakat')->user())
+                    {{-- Jika user login dari data table masyarakat maka tampilan tombol reports kosong--}}
+                @elseif (Auth::guard('admin')->user())
+                    {{-- sebaliknya jika yang login dari table petugas maka tampilan tombol reports ada --}}
+                    <hr>
+                    <h5 class="list-group-item list-group-item-action bg-transparent second-text fw-bold text-start active">
+                        <i class="fa-solid fa-user-shield"> Report</i>
+                    </h5>
+                    <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold fs-7">
+                        <h6><li>Incoming Report</li></h6>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold fs-7">
+                        <h6><li>Processing Report</li></h6>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold fs-7">
+                        <h6><li>Declined Report</li></h6>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold fs-7">
+                        <h6><li>Finished Report</li></h6>
+                    </a>
+                @endif
+                
+                @if (Auth::guard('masyarakat')->user())
+                    
+                @elseif(Auth::guard('admin')->user()->level == 'admin')
+                    <hr>
+                    <h5 class="list-group-item list-group-item-action bg-transparent second-text fw-bold text-start active">
+                        <i class="fa-solid fa-users"> Account</i>
+                    </h5>
+                    <a href="petugas-list" class="list-group-item list-group-item-action bg-transparent second-text fw-bold fs-7">
+                        <h6><li>Petugas</li></h6>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold fs-7">
+                        <h6><li>Masyarakat</li></h6>
+                    </a>
+                @endif
+
+                @if (Auth::guard('masyarakat')->user())
+
+                @elseif(Auth::guard('admin')->user()->level == 'admin')
+                    <hr>
+                    <h6 class="list-group-item list-group-item-action bg-transparent second-text fw-bold fs-7 active">
+                        <i class="fa-solid fa-file-pdf"> Generate Report</i>
+                    </h6>
+                    <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold fs-7">
+                        <h6><li>PDF</li></h6>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold fs-7">
+                        <h6><li>Excel</li></h6>
+                    </a>
+                @endif
+                
                 {{-- garis --}}
                 <hr>
                 {{-- garis --}}
