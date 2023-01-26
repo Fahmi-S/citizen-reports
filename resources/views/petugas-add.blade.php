@@ -5,8 +5,8 @@
 @section('content')
 
 <h3 class=>Tambah Petugas</h3>
-<div class="d-flex justify-content-end">
-    <a href="petugas-list" class="btn btn-primary">Kembali</a>
+<div class="d-flex justify-content-start">
+    <a href="petugas-list" class="btn btn-primary">- Kembali</a>
 </div>
     <div class="row g-3 my-2 w-50 ">
         @if ($errors->any())
@@ -19,41 +19,57 @@
             </div>
         @endif
         <div>
-            <form action="petugas-add" method="post">
+            <form action="petugas-add" method="POST" class="mb-3">
                 @csrf
-                <div class>
-                    <label for="nama_petugas" class="form-label">Nama Petugas</label>
-                    <input type="text" name="nama_petugas" id="nama_petugas" class="form-control" placeholder="Nama Petugas...">
+                <div class="form-floating mb-3">
+                    <input type="text" name="nama_petugas" class="form-control rounded-0" id="floatingInput" placeholder="name@example.com">
+                    <label for="floatingInput">Nama Petugas</label>
                 </div>
 
-                <div class="mt-3">
-                    <label for="username" class="form-label">Username</label>
-                    <input type="text" class="form-control" name="username" id="username" placeholder="Username...">
+                <div class="form-floating mb-3">
+                    <input type="text" name="username" class="form-control rounded-0" id="floatingInput" placeholder="name@example.com">
+                    <label for="floatingInput">Username</label>
                 </div>
 
-                <div class="mt-3">
-                    <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control" name="password" id="password" placeholder="Password...">
+                <div class="form-floating mb-3">
+                    <input type="password" name="password" class="form-control rounded-0" id="floatingPassword" placeholder="Password...">
+                    <label for="floatingPassword">New Password</label>
                 </div>
 
-                <div class="mt-3">
-                    <label for="telephone">Telephone</label>
-                    <input type="text" class="form-control" name="telp" id="telp" placeholder="Telephone...">
+                <div class="form-floating mb-3">
+                    <input type="text" name="telp" class="form-control rounded-0" id="floatingInput" placeholder="name@example.com">
+                    <label for="floatingInput">Telephone</label>
                 </div>
 
-                <div class="mt-3 w-25">
-                    <label for="level">Level</label>
-                    <select name="level" id="level" class="form-control">
+                <div class="form-check mb-3">
+                    <input class="form-check-input" type="checkbox" onclick="myFunction()" id="autoSizingCheck2">
+                    <label class="form-check-label">Show Password</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <select name="level" id="floatingSelect" class="form-select">
+                        <option selected hidden>Select Level</option>
                         <option value="admin">Admin</option>
                         <option value="petugas">Petugas</option>
                         <option value="masyarakat">Masyarakat</option>
                     </select>
+                    <label for="floatingSelect">Level</label>
                 </div>
 
-                <div class="mt-4">
-                    <button class="btn btn-primary" type="submit">Save</button>
+                <div class="d-grid gap-2 mb-3">
+                    <button class="btn btn-primary" type="submit">Update</button>
                 </div>
             </form>
         </div>
     </div>
+    <script>
+        function myFunction() {
+            var x = document.getElementById("floatingPassword");
+            if(x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+        }
+    </script>
 @endsection

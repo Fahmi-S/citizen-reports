@@ -24,11 +24,11 @@ class PetugasController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'nama_petugas' => 'required',
-            'username' => 'required|unique:petugas|max:20',
-            'password' => 'required',
-            'telp' => 'required',
-            'level' => 'required',
+            'nama_petugas'      => ['required'],
+            'username'          => ['required', 'unique:petugas', 'max:20'],
+            'password'          => ['required'],
+            'telp'              => ['required'],
+            'level'             => ['required'],
         ]);
         // //proccess adding and encrypting password
         $request['password'] = Hash::make($request->password);
@@ -44,15 +44,15 @@ class PetugasController extends Controller
 
     public function update(Request $request, $slug)
     {   
+        $petugas = Petugas::whereSlug($slug)->first();
         $validated = $request->validate([
-            'nama_petugas' => 'required',
-            'username' => 'required|max:20',
-            'password' => 'required',
-            'telp' => 'required',
-            'level' => 'required',
+            'nama_petugas'      => ['required'],
+            'username'          => ['required', 'max:20', "unique:petugas,username,{$petugas->id}"],
+            'password'          => ['required'],
+            'telp'              => ['required'],
+            'level'             => ['required'],
         ]);
         $request['password'] = Hash::make($request->password);
-        $petugas = Petugas::where('slug', $slug)->first();
         $petugas->slug = null;
         $petugas->update($request->all());
         return redirect('petugas-list')->with('status', 'Data Berhasil Diubah!');

@@ -55,12 +55,7 @@
                         </div>
                     </form>
                     <div class="sign-up-accounts">
-                        <a href="#" class="d-flex justify-content-center mb-3 text-decoration-none">Or Sign Up</a>
-                        <div class="social-accounts d-flex justify-content-center">
-                            <a href="#" title="Facebook"><i class="fa fa-facebook"></i></a>
-                            <a href="#" title="Twitter"><i class="fa fa-twitter"></i></a>
-                            <a href="#" title="Google"><i class="fa fa-google"></i></a>
-                        </div>
+                        <a href="/register" class="d-flex justify-content-center mb-3 text-decoration-none">Or Sign Up</a>
                     </div>
                 </div>
             </div>

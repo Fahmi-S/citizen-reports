@@ -17,17 +17,14 @@
 
         <div class="bg-white" id="sidebar-wrapper">
             <div class="sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase border-bottom">
-                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fs-4 text-center active">
-                Citizen Reports
+                <a href="#">Citizen Reports
                 </a></div>
             <div class="list-group list-group-flush my-3">
                 @if (Auth::guard('masyarakat')->user())
                         
                     @elseif(Auth::guard('admin')->user()->level == 'admin')
                         <a href="dashboard" class="list-group-item list-group-item-action bg-transparent second-text fs-4 text-center active">
-                            <i class="fas fa-tachometer-alt me-2"></i>
-                            
-                            Dashboard
+                            <i class="fas fa-tachometer-alt me-2"></i>Dashboard
                         </a>
                         <hr>
                     @endif
@@ -36,7 +33,7 @@
                 <h5 class="list-group-item list-group-item-action bg-transparent second-text fw-bold text-start active">
                     <i class="fa-solid fa-user"> USER</i>
                 </h5>
-                <a href="profile" class="list-group-item list-group-item-action bg-transparent second-text fw-bold fs-7">
+                <a href="/profile" class="list-group-item list-group-item-action bg-transparent second-text fw-bold fs-7">
                     <h6><li>Profile</li></h6>
                 </a>
 
@@ -69,10 +66,10 @@
                     <h5 class="list-group-item list-group-item-action bg-transparent second-text fw-bold text-start active">
                         <i class="fa-solid fa-users"> Account</i>
                     </h5>
-                    <a href="petugas-list" class="list-group-item list-group-item-action bg-transparent second-text fw-bold fs-7">
+                    <a href="/petugas-list" class="list-group-item list-group-item-action bg-transparent second-text fw-bold fs-7">
                         <h6><li>Petugas</li></h6>
                     </a>
-                    <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold fs-7">
+                    <a href="/masyarakat-list" class="list-group-item list-group-item-action bg-transparent second-text fw-bold fs-7">
                         <h6><li>Masyarakat</li></h6>
                     </a>
                 @endif
@@ -110,7 +107,10 @@
                     <h2 class="fs-2 m-0">
                         @if (request()->route()->uri == 'profile')Profile
                         @elseif (request()->route()->uri == 'dashboard')Dashboard
-                        @elseif (request()->route()->uri == 'petugas-list' || request()->route()->uri == 'petugas-add' || request()->route()->uri == 'petugas-deleted' || request()->route()->uri == 'petugas-edit/{slug}' || request()->route()->uri == 'petugas-delete/{slug}')Petugas Manage
+                        @elseif (request()->route()->uri == 'petugas-list' || request()->route()->uri == 'petugas-add' || request()->route()->uri == 'petugas-deleted' || request()->route()->uri == 'petugas-edit/{slug}' || request()->route()->uri == 'petugas-delete/{slug}')
+                        Petugas Manager
+                        @elseif(request()->route()->uri == 'masyarakat-list' || request()->route()->uri == 'masyarakat-add' || request()->route()->uri == 'masyarakat-edit' || request()->route()->uri == 'masyarakat-edit/{slug}' || request()->route()->uri == 'masyarakat-delete/{slug}' || request()->route()->uri == 'masyarakat-deleted')
+                        Masyarakat Manager
                         @endif
                     </h2>
                 </div>
