@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Masyarakat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
 class AuthController extends Controller
@@ -51,5 +53,22 @@ class AuthController extends Controller
     public function register()
     {
         return view('register');
+    }
+
+    public function registerProcess(Request $request)
+    {
+        $validated = $request->validate([
+            'nik' => 'required|unique:masyarakat|max:13',
+            'nama' => 'required|max:32',
+            'username' => 'required|unique:masyarakat|max:25',
+            'password' => 'required|min:3',
+            'telp' => 'required',
+        ]);
+        //Hashing password
+        $request['password'] = Hash::make($request->password);
+        $masyarakat = Masyarakat::create($request->all());
+        Session::flash('status', 'success');
+        Session::flash('message', 'Registrasi Berhasil Dilakukan!');
+        return redirect('register');
     }
 }

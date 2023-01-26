@@ -4,12 +4,14 @@ namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;
 // use Illuminate\Database\Eloquent\Model;
+use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Warga;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Masyarakat extends Warga
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, Sluggable, SoftDeletes;
     public $incrementing = false;
 
     protected $primaryKey = 'nik';
@@ -18,8 +20,17 @@ class Masyarakat extends Warga
     protected $guard = 'masyarakat';
 
     protected $fillable = [
-        'nik', 'nama', 'username', 'password','telp',
+        'nik', 'nama', 'slug', 'username', 'password','telp',
     ];
+
+    public function sluggable(): array
+    {
+        return [
+            'slug' => [
+                'source' => 'nama'
+            ]
+        ];
+    }
 
     protected $hidden = [
         'password', 'remember_token',
