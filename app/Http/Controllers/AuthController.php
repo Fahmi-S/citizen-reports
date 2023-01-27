@@ -22,8 +22,6 @@ class AuthController extends Controller
             'password' => ['required'],
         ]);
 
-        
-
         if(Auth::guard('admin')->attempt($credentials)){
             if (Auth::guard('admin')->user()->level == 'admin'){
                 return redirect('dashboard');
@@ -66,7 +64,7 @@ class AuthController extends Controller
         ]);
         //Hashing password
         $request['password'] = Hash::make($request->password);
-        $masyarakat = Masyarakat::create($request->all());
+        $masyarakat = Masyarakat::create($request->only('nik', 'nama', 'username', 'password', 'telp'));
         Session::flash('status', 'success');
         Session::flash('message', 'Registrasi Berhasil Dilakukan!');
         return redirect('register');
