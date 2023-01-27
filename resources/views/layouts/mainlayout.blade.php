@@ -36,6 +36,13 @@
                 <a href="/profile" class="list-group-item list-group-item-action bg-transparent second-text fw-bold fs-7">
                     <h6><li>Profile</li></h6>
                 </a>
+                <hr>
+                <h5 class="list-group-item list-group-item-action bg-transparent second-text fw-bold text-start active">
+                    <i class="fa-solid fa-flag"> Report Emergency</i>
+                </h5>
+                <a href="/report-add" class="list-group-item list-group-item-action bg-transparent second-text fw-bold fs-7">
+                    <h6><li>Make Report</li></h6>
+                </a>
 
                 @if(Auth::guard('masyarakat')->user())
                     {{-- Jika user login dari data table masyarakat maka tampilan tombol reports kosong--}}

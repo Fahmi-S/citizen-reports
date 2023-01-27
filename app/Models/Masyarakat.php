@@ -35,4 +35,14 @@ class Masyarakat extends Warga
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * Get all of the comments for the Masyarakat
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function report()
+    {
+        return $this->hasMany(Report::class, 'nik', 'nik');
+    }
 }

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\PetugasController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
@@ -57,6 +58,9 @@ Route::middleware(['auth:admin,masyarakat'])->group(function () {
     Route::get('profile', [ProfileController::class, 'index']);
     //Logout
     Route::get('logout', [AuthController::class, 'logout']);
+    //Report
+    Route::get('report-add', [ReportController::class, 'add']);
+    Route::post('report-add', [ReportController::class, 'store']);
 
 });
 
