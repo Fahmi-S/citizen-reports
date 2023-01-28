@@ -61,6 +61,7 @@ Route::middleware(['auth:admin,masyarakat'])->group(function () {
     //Report
     Route::get('report-add', [ReportController::class, 'add']);
     Route::post('report-add', [ReportController::class, 'store']);
+    Route::get('report-list', [ReportController::class, 'index']);
 
 });
 
