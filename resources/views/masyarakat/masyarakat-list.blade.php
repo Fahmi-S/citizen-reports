@@ -20,9 +20,9 @@
         @endif
     </div>
     
-    <div class="my-4 bg-white rounded shadow-sm table-hover table-responsive">
+    <div class="my-4 bg-white rounded shadow-sm table-hover table-responsive text-center">
         <table class="table">
-            <thead>
+            <thead class="">
                 <tr>
                     <th scope="col" width="50">No.</th>
                     <th scope="col">NIK</th>
@@ -41,8 +41,8 @@
                         <td>{{ $item->username }}</td>
                         <td>{{ $item->telp }}</td>
                         <td>
-                            <a href="masyarakat-edit/{{ $item->slug }}">Edit</a>
-                            <a href="masyarakat-delete/{{ $item->slug }}">Delete</a>
+                            <a href="masyarakat-edit/{{ $item->slug }}" class="btn btn-info">Edit</a>
+                            <a href="masyarakat-delete/{{ $item->slug }}" class="btn btn-danger">Delete</a>
                         </td>
                     </tr>
                 @endforeach

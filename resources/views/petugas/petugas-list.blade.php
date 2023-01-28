@@ -20,7 +20,7 @@
         @endif
     </div>
     
-    <div class="my-4 bg-white rounded shadow-sm table-hover table-responsive">
+    <div class="my-4 bg-white rounded shadow-sm table-hover table-responsive text-center">
         <table class="table">
             <thead>
                 <tr>
@@ -41,8 +41,8 @@
                         <td>{{ $item->telp }}</td>
                         <td>{{ $item->level }}</td>
                         <td>
-                            <a href="petugas-edit/{{ $item->slug }}">Edit</a>
-                            <a href="petugas-delete/{{ $item->slug }}">Delete</a>
+                            <a href="petugas-edit/{{ $item->slug }}" class="btn btn-info">Edit</a>
+                            <a href="petugas-delete/{{ $item->slug }}" class="btn btn-danger">Delete</a>
                         </td>
                     </tr>
                 @endforeach

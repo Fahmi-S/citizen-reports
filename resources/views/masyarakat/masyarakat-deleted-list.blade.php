@@ -16,7 +16,7 @@
         @endif
     </div>
     
-    <div class="my-4 bg-white rounded shadow-sm table-hover table-responsive">
+    <div class="my-4 bg-white rounded shadow-sm table-hover table-responsive text-center">
         <table class="table">
             <thead>
                 <tr>
@@ -37,7 +37,7 @@
                         <td>{{ $item->username }}</td>
                         <td>{{ $item->telp }}</td>
                         <td>
-                            <a href="masyarakat-restore/{{ $item->slug }}">Restore</a>
+                            <a href="masyarakat-restore/{{ $item->slug }}" class="btn btn-primary">Restore</a>
                         </td>
                     </tr>
                 @endforeach

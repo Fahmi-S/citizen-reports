@@ -17,7 +17,7 @@
         @endif
     </div>
     
-    <div class="my-4 bg-white rounded shadow-sm table-hover table-responsive">
+    <div class="my-4 bg-white rounded shadow-sm table-hover table-responsive text-center">
         <table class="table">
             <thead>
                 <tr>
@@ -38,7 +38,7 @@
                         <td>{{ $item->telp }}</td>
                         <td>{{ $item->level }}</td>
                         <td>
-                            <a href="petugas-restore/{{ $item->slug }}">Restore</a>
+                            <a href="petugas-restore/{{ $item->slug }}" class="btn btn-primary">Restore</a>
                         </td>
                     </tr>
                 @endforeach

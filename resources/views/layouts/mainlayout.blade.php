@@ -48,11 +48,8 @@
                     <a href="/report-list" class="list-group-item list-group-item-action bg-transparent second-text fw-bold fs-7">
                         <h6><li>Incoming Report</li></h6>
                     </a>
-                    <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold fs-7">
+                    <a href="/report-process-list" class="list-group-item list-group-item-action bg-transparent second-text fw-bold fs-7">
                         <h6><li>Processing Report</li></h6>
-                    </a>
-                    <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold fs-7">
-                        <h6><li>Declined Report</li></h6>
                     </a>
                     <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold fs-7">
                         <h6><li>Finished Report</li></h6>
@@ -102,7 +99,7 @@
                 @endif
                 <hr>
                 {{-- garis --}}
-                <a href="#" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold">
+                <a href="l/ogout" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold">
                     <i class="fas fa-power-off me-2"></i>Logout
                 </a>
             </div>
@@ -115,12 +112,14 @@
                 <div class="d-flex align-items-center">
                     <i class="fas fa-align-left primary-text fs-4 me-3" id="menu-toggle"></i>
                     <h2 class="fs-2 m-0">
-                        @if (request()->route()->uri == 'profile')Profile
+                        @if (request()->route()->uri == 'profile')User
                         @elseif (request()->route()->uri == 'dashboard')Dashboard
                         @elseif (request()->route()->uri == 'petugas-list' || request()->route()->uri == 'petugas-add' || request()->route()->uri == 'petugas-deleted' || request()->route()->uri == 'petugas-edit/{slug}' || request()->route()->uri == 'petugas-delete/{slug}')
                         Petugas Manager
                         @elseif(request()->route()->uri == 'masyarakat-list' || request()->route()->uri == 'masyarakat-add' || request()->route()->uri == 'masyarakat-edit' || request()->route()->uri == 'masyarakat-edit/{slug}' || request()->route()->uri == 'masyarakat-delete/{slug}' || request()->route()->uri == 'masyarakat-deleted')
                         Masyarakat Manager
+                        @elseif(request()->route()->uri == 'report-list' || request()->route()->uri == 'report-process/{id}' || request()->route()->uri == 'report-process-list')
+                        Report
                         @endif
                     </h2>
                 </div>
@@ -144,9 +143,9 @@
                                 @endif
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="profile">Profile</a></li>
+                                <li><a class="dropdown-item" href="/profile">Profile</a></li>
                                 <li><a class="dropdown-item" href="#">Settings</a></li>
-                                <li><a class="dropdown-item" href="logout">Logout</a></li>
+                                <li><a class="dropdown-item" href="/logout">Logout</a></li>
                             </ul>
                         </li>
                     </ul>
