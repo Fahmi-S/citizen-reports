@@ -4,7 +4,7 @@
 
 @section('content')
 
-<h3 class="text-center">Report Incoming List</h3>
+<h3 class="text-center">Report Process List</h3>
 
     <div class="mt-5">
         @if(session('status'))
@@ -22,21 +22,22 @@
                     <th scope="col">NIK</th>
                     <th scope="col">Nama</th>
                     <th scope="col">Tanggal / Jam</th>
+                    <th scope="col">Tanggapan</th>
                     <th scope="col">Status</th>
                     <th scope="col">Action</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($report as $item)
-                
                     <tr>
                         <th scope="row">{{ $loop->iteration }}</th>
                         <td>{{ $item->nik }}</td>
                         <td>{{ $item->masyarakat->nama }}</td>
-                        <td>{{ $item->created_at }}</td>
+                        <td>{{ $item->tanggapan->created_at }}</td>
+                        <td>{{ $item->tanggapan->tanggapan }}</td>
                         <td>{{ $item->status }}</td>
                         <td>
-                            <a href="/report-process/{{ $item->id }}" class="btn btn-warning">Process</a>
+                            <a href="#" class="btn btn-success">Done</a>
                         </td>
                     </tr>
                 @endforeach

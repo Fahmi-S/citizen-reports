@@ -25,7 +25,7 @@
                 <h3 class="mb-4 text-center fs-1">Report</h3>
                 <form action="report-add" method="POST" class="mb-3" enctype="multipart/form-data">
                     @csrf
-                    <div class="mb-3 form-floating">
+                    <div class="form-floating mb-3">
                         <textarea class="form-control py-5 rounded-0" id="floatingInput" rows="6" name="isi_laporan"></textarea>
                         <label for="floatingInput">Silahkan Jelaskan Apa Yang Akan Anda Laporkan</label>
                     </div>
@@ -43,15 +43,5 @@
         </div>
     </div>
 </section>
-<script>
-    function myFunction() {
-        var x = document.getElementById("floatingPassword");
-        if(x.type === "password") {
-            x.type = "text";
-        } else {
-            x.type = "password";
-        }
-    }
-</script>
 
 @endsection

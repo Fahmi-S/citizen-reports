@@ -16,14 +16,14 @@ class Report extends Model
         'foto',
         'status',
     ];
-    
-    /**
-     * Get the user that owns the Report
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
+
     public function masyarakat()
     {
         return $this->belongsTo(Masyarakat::class, 'nik', 'nik');
+    }
+
+    public function tanggapan()
+    {
+        return $this->hasOne(Tanggapan::class, 'id_pengaduan', 'id');
     }
 }

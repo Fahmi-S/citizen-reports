@@ -50,6 +50,11 @@ Route::middleware(['auth:admin,masyarakat', 'only_admin'])->group(function () {
     Route::get('masyarakat-destroy/{slug}', [MasyarakatController::class, 'destroy']);
     Route::get('masyarakat-deleted', [MasyarakatController::class, 'deletedMasyarakat']);
     Route::get('masyarakat-restore/{slug}', [MasyarakatController::class, 'restore']);
+    //Report
+    Route::get('report-list', [ReportController::class, 'index']);
+    Route::get('report-process/{id}', [ReportController::class, 'detail']);
+    Route::put('report-process/{id}', [ReportController::class, 'process']);
+    Route::get('report-process-list', [ReportController::class, 'processList']);
 });
 
 Route::middleware(['auth:admin,masyarakat'])->group(function () {
@@ -61,8 +66,6 @@ Route::middleware(['auth:admin,masyarakat'])->group(function () {
     //Report
     Route::get('report-add', [ReportController::class, 'add']);
     Route::post('report-add', [ReportController::class, 'store']);
-    Route::get('report-list', [ReportController::class, 'index']);
-
 });
 
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Models\Report;
+use App\Models\Tanggapan;
 use App\Models\Masyarakat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -24,7 +25,7 @@ class ReportController extends Controller
 
         if($request->file('foto')){
             $extension = $request->file('foto')->getClientOriginalExtension();
-            $newName = $request->isi_laporan.'-'.now()->timestamp.'-'.$extension;
+            $newName = $request->isi_laporan.'-'.now()->timestamp.'.'.$extension;
             $request->file('foto')->storeAs('foto', $newName);
         }
 
@@ -40,7 +41,37 @@ class ReportController extends Controller
 
     public function index()
     {
-        $report = Report::with('masyarakat')->orderBy('created_at', 'DESC')->get();
+        $report = Report::with('masyarakat')->where('status', '0')->orderBy('created_at', 'DESC')->get();
         return view('report.report-list', ['report' => $report]);
+    }
+
+    public function detail($id)
+    {
+        $report = Report::where('id', $id)->get();
+        return view('report.report-process-detail', ['report' => $report]);
+    }
+
+    public function process(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'tanggapan'      => ['required'],
+        ]);
+        $tanggapan = Report::with('tanggapan')->get('id', $id);
+        $tanggapan = Tanggapan::create([
+            'id_pengaduan'      => $id,
+            'tgl_tanggapan'     => Carbon::now(),
+            'tanggapan'         => $request['tanggapan'],
+            'id_petugas'        => Auth::guard('admin')->user()->id,
+        ]);
+        $id = Report::findOrFail($id);
+        $id->status = 'proses';
+        $id->update();
+        return redirect('report-list');
+    }
+
+    public function processList()
+    {
+        $report = Report::with(['masyarakat','tanggapan'])->where('status', 'proses')->orderBy('created_at', 'DESC')->get();
+        return view('report.report-process-list', ['report' => $report]);
     }
 }
