@@ -14,12 +14,12 @@ class MasyarakatController extends Controller
     public function index()
     {
         $masyarakat = Masyarakat::all();
-        return view('masyarakat-list', ['masyarakat' => $masyarakat]);
+        return view('masyarakat.masyarakat-list', ['masyarakat' => $masyarakat]);
     }
     
     public function add()
     {
-        return view('masyarakat-add');
+        return view('masyarakat.masyarakat-add');
     }
 
     public function store(Request $request)
@@ -40,7 +40,7 @@ class MasyarakatController extends Controller
     public function edit($slug)
     {
         $masyarakat = Masyarakat::where('slug', $slug)->first();
-        return view('masyarakat-edit', ['masyarakat' => $masyarakat]);
+        return view('masyarakat.masyarakat-edit', ['masyarakat' => $masyarakat]);
     }
 
     public function update(Request $request, $slug)
@@ -62,7 +62,7 @@ class MasyarakatController extends Controller
     public function delete($slug)
     {
         $masyarakat = Masyarakat::whereSlug($slug)->first();
-        return view('masyarakat-delete', ['masyarakat' => $masyarakat]);
+        return view('masyarakat.masyarakat-delete', ['masyarakat' => $masyarakat]);
     }
 
     public function destroy($slug)
@@ -75,7 +75,7 @@ class MasyarakatController extends Controller
     public function deletedMasyarakat()
     {
         $deletedMasyarakat = Masyarakat::onlyTrashed()->get();
-        return view('masyarakat-deleted-list', ['deletedMasyarakat' => $deletedMasyarakat]);
+        return view('masyarakat.masyarakat-deleted-list', ['deletedMasyarakat' => $deletedMasyarakat]);
     }
 
     public function restore($slug)

@@ -12,13 +12,13 @@ class PetugasController extends Controller
     {
         //filtering hanya petugas yang diambil datanya
         $petugas = Petugas::where('level', 'petugas')->get();
-        return view('petugas-list', ['petugas' => $petugas]);
+        return view('petugas.petugas-list', ['petugas' => $petugas]);
     }
     
     public function add()
     {
         $petugas = Petugas::all();
-        return view('petugas-add',['petugas' => $petugas]);
+        return view('petugas.petugas-add',['petugas' => $petugas]);
     }
 
     public function store(Request $request)
@@ -39,7 +39,7 @@ class PetugasController extends Controller
     public function edit($slug)
     {
         $petugas = Petugas::where('slug', $slug)->first();
-        return view('petugas-edit', ['petugas' => $petugas]);
+        return view('petugas.petugas-edit', ['petugas' => $petugas]);
     }
 
     public function update(Request $request, $slug)
@@ -61,7 +61,7 @@ class PetugasController extends Controller
     public function delete($slug)
     {
         $petugas = Petugas::where('slug', $slug)->first();
-        return view('petugas-delete', ['petugas' => $petugas]);
+        return view('petugas.petugas-delete', ['petugas' => $petugas]);
     }
 
     public function destroy($slug)
@@ -74,7 +74,7 @@ class PetugasController extends Controller
     public function deletedPetugas()
     {
         $deletedPetugas = Petugas::onlyTrashed()->get();
-        return view('petugas-deleted-list', ['deletedPetugas' => $deletedPetugas]);
+        return view('petugas.petugas-deleted-list', ['deletedPetugas' => $deletedPetugas]);
     }
 
     public function restore($slug)

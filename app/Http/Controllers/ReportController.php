@@ -12,7 +12,7 @@ class ReportController extends Controller
 {
     public function add()
     {
-        return view('report-add');
+        return view('report.report-add');
     }
 
     public function store(Request $request)
@@ -36,5 +36,11 @@ class ReportController extends Controller
         ]);
         
         return redirect('profile')->with('status', 'Laporan Berhasil Terkirim!, Silahkan Tunggu Tanggapan Petugas');
+    }
+
+    public function index()
+    {
+        $report = Report::with('masyarakat')->orderBy('created_at', 'DESC')->get();
+        return view('report.report-list', ['report' => $report]);
     }
 }

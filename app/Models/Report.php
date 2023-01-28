@@ -24,6 +24,6 @@ class Report extends Model
      */
     public function masyarakat()
     {
-        return $this->belongsTo(Masyarakat::class);
+        return $this->belongsTo(Masyarakat::class, 'nik', 'nik');
     }
 }

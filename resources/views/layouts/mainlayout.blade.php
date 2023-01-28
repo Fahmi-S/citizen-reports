@@ -36,14 +36,7 @@
                 <a href="/profile" class="list-group-item list-group-item-action bg-transparent second-text fw-bold fs-7">
                     <h6><li>Profile</li></h6>
                 </a>
-                <hr>
-                <h5 class="list-group-item list-group-item-action bg-transparent second-text fw-bold text-start active">
-                    <i class="fa-solid fa-flag"> Report Emergency</i>
-                </h5>
-                <a href="/report-add" class="list-group-item list-group-item-action bg-transparent second-text fw-bold fs-7">
-                    <h6><li>Make Report</li></h6>
-                </a>
-
+                
                 @if(Auth::guard('masyarakat')->user())
                     {{-- Jika user login dari data table masyarakat maka tampilan tombol reports kosong--}}
                 @elseif (Auth::guard('admin')->user())
@@ -52,7 +45,7 @@
                     <h5 class="list-group-item list-group-item-action bg-transparent second-text fw-bold text-start active">
                         <i class="fa-solid fa-user-shield"> Report</i>
                     </h5>
-                    <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold fs-7">
+                    <a href="/report-list" class="list-group-item list-group-item-action bg-transparent second-text fw-bold fs-7">
                         <h6><li>Incoming Report</li></h6>
                     </a>
                     <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold fs-7">
@@ -65,7 +58,7 @@
                         <h6><li>Finished Report</li></h6>
                     </a>
                 @endif
-                
+                    
                 @if (Auth::guard('masyarakat')->user())
                     
                 @elseif(Auth::guard('admin')->user()->level == 'admin')
@@ -95,8 +88,18 @@
                         <h6><li>Excel</li></h6>
                     </a>
                 @endif
-                
-                {{-- garis --}}
+
+                @if (Auth::guard('masyarakat')->user())
+                    <hr>
+                    <h5 class="list-group-item list-group-item-action bg-transparent second-text fw-bold text-start active">
+                        <i class="fa-solid fa-flag"> Emergency</i>
+                    </h5>
+                    <a href="/report-add" class="list-group-item list-group-item-action bg-transparent second-text fw-bold fs-7">
+                        <h6><li>Make Report</li></h6>
+                    </a>
+                @elseif(Auth::guard('admin')->user());
+
+                @endif
                 <hr>
                 {{-- garis --}}
                 <a href="#" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold">
