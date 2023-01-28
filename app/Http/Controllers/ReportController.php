@@ -22,12 +22,19 @@ class ReportController extends Controller
             'foto'             => ['required'],
         ]);
 
+        if($request->file('foto')){
+            $extension = $request->file('foto')->getClientOriginalExtension();
+            $newName = $request->isi_laporan.'-'.now()->timestamp.'-'.$extension;
+            $request->file('foto')->storeAs('foto', $newName);
+        }
+
         $report = Report::create([
             'tgl_pengaduan'     => Carbon::now(),
             'nik'               => Auth::guard('masyarakat')->user()->nik,
             'isi_laporan'       => $request['isi_laporan'],
-            'foto'              => $request['foto'],
+            'foto'              => $request['foto'] = $newName,
         ]);
+        
         return redirect('profile')->with('status', 'Laporan Berhasil Terkirim!, Silahkan Tunggu Tanggapan Petugas');
     }
 }

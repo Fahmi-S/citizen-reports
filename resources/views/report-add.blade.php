@@ -23,7 +23,7 @@
             @endif
             <div class="box shadow bg-white p-4">
                 <h3 class="mb-4 text-center fs-1">Report</h3>
-                <form action="" method="POST" class="mb-3">
+                <form action="report-add" method="POST" class="mb-3" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3 form-floating">
                         <textarea class="form-control py-5 rounded-0" id="floatingInput" rows="6" name="isi_laporan"></textarea>
