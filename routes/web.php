@@ -18,6 +18,10 @@ use App\Http\Controllers\MasyarakatController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+
+
+
 Route::middleware(['only_guest'])->group(function () {
     //Login Controllers
     Route::get('/login', [AuthController::class, 'index'])->name('login');
@@ -59,13 +63,18 @@ Route::middleware(['auth:admin,masyarakat', 'only_admin'])->group(function () {
 
 Route::middleware(['auth:admin,masyarakat'])->group(function () {
     
+    Route::get('/', function () {
+    return view('welcome');
+    });
     //profile
     Route::get('profile', [ProfileController::class, 'index']);
+    Route::get('profile-edit', [ProfileController::class, 'edit']);
+    Route::put('profile-edit', [ProfileController::class, 'update']);
     //Logout
     Route::get('logout', [AuthController::class, 'logout']);
     //Report
-    Route::get('report-add', [ReportController::class, 'add']);
-    Route::post('report-add', [ReportController::class, 'store']);
+    Route::get('report-add', [ReportController::class, 'add'])->middleware('only_masyarakat');
+    Route::post('report-add', [ReportController::class, 'store'])->middleware('only_masyarakat');
 });
 
 
