@@ -28,10 +28,20 @@ class MasyarakatController extends Controller
             'nik'               => ['required', 'unique:masyarakat', 'max:13'],
             'nama'              => ['required', 'max:32'],
             'username'          => ['required', 'unique:masyarakat', 'max:25'],
+            'image'             => ['mimes:jpg,png,jpeg,gif,svg'],
             'password'          => ['required', 'min:3'],
             'telp'              => ['required'],
         ]);
+        $newName = '';
+
+        if($request->file('image')){
+            $extension = $request->file('image')->getClientOriginalExtension();
+            $newName = $request->username.'-'.now()->timestamp.'.'.$extension;
+            $request->file('image')->storeAs('profile/masyarakat', $newName);
+        }
+
         //Hashing password
+        $request['foto'] = $newName;
         $request['password'] = Hash::make($request->password);
         $masyarakat = Masyarakat::create($request->all());
         return redirect('masyarakat-list')->with('status', 'Data Berhasil Ditambahkan!');
@@ -50,9 +60,18 @@ class MasyarakatController extends Controller
             'nik'               => ['required', "unique:masyarakat,nik,{$masyarakat->nik},nik", 'max:16'],
             'nama'              => ['required', 'max:32'],
             'username'          => ['required', "unique:masyarakat,username,{$masyarakat->nik},nik", 'max:25'],
+            'image'             => ['mimes:jpg,png,jpeg,gif,svg'],
             'password'          => ['required','min:3'],
             'telp'              => ['required'],
         ]);
+
+        if ($request->file('image')){
+            $extension = $request->file('image')->getClientOriginalExtension();
+            $newName = $request->username.'-'.now()->timestamp.'.'.$extension;
+            $request->file('image')->storeAs('profile/masyarakat', $newName);
+            $request['foto'] = $newName;
+        }
+
         $request['password'] = Hash::make($request->password);
         $masyarakat->slug = null;
         $masyarakat->update($request->all());

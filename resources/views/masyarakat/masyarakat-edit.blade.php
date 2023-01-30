@@ -1,6 +1,6 @@
 @extends('layouts.mainlayout')
 
-@section('title', 'Dashboard')
+@section('title', 'Masyarakat Edit')
 
 @section('content')
 
@@ -19,7 +19,7 @@
             </div>
         @endif
         <div>
-            <form action="/masyarakat-edit/{{ $masyarakat->slug }}" method="POST" class="mb-3">
+            <form action="/masyarakat-edit/{{ $masyarakat->slug }}" method="POST" class="mb-3" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="form-floating mb-3">
@@ -45,6 +45,20 @@
                 <div class="form-floating mb-3">
                     <input type="text" name="telp" class="form-control rounded-0" value="{{ $masyarakat->telp }}" id="floatingInput" placeholder="name@example.com">
                     <label for="floatingInput">Telephone</label>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="floatingInput">Foto Profile</label>
+                    <input type="file" name="image" class="form-control rounded-0" id="floatingInput" placeholder="name@example.com">
+                </div>
+
+                <div class="mb-3">
+                    <label for="currentImage" class="form-label" style="display: block">Current Image</label>
+                    @if ($masyarakat->foto != '')
+                        <img src="{{ asset('storage/profile/masyarakat/'.$masyarakat->foto) }}" alt="" width="300px">
+                    @else
+                        <img src="{{ asset('images/user.png') }}" alt="" width="300px">
+                    @endif
                 </div>
 
                 <div class="form-check mb-3">

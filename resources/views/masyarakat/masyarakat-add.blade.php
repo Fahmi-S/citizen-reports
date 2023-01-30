@@ -1,6 +1,6 @@
 @extends('layouts.mainlayout')
 
-@section('title', 'Dashboard')
+@section('title', 'Masyarakat Add')
 
 @section('content')
 
@@ -19,7 +19,7 @@
             </div>
         @endif
         <div>
-            <form action="masyarakat-add" method="POST" class="mb-3">
+            <form action="masyarakat-add" method="POST" class="mb-3" enctype="multipart/form-data">
                 @csrf
                 <div class="form-floating mb-3">
                     <input type="text" name="nik" class="form-control rounded-0" id="floatingInput" placeholder="name@example.com">
@@ -44,6 +44,11 @@
                 <div class="form-floating mb-3">
                     <input type="text" name="telp" class="form-control rounded-0" id="floatingInput" placeholder="name@example.com">
                     <label for="floatingInput">Telephone</label>
+                </div>
+
+                <div class="mb-3">
+                    <label for="image">Foto Profile</label>
+                    <input type="file" name="image" class="form-control rounded-0" id="floatingInput" placeholder="name@example.com">
                 </div>
 
                 <div class="form-check mb-3">

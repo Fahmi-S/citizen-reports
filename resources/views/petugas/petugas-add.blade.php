@@ -1,6 +1,6 @@
 @extends('layouts.mainlayout')
 
-@section('title', 'Dashboard')
+@section('title', 'Petugas Add')
 
 @section('content')
 
@@ -19,7 +19,7 @@
             </div>
         @endif
         <div>
-            <form action="petugas-add" method="POST" class="mb-3">
+            <form action="petugas-add" method="POST" class="mb-3" enctype="multipart/form-data">
                 @csrf
                 <div class="form-floating mb-3">
                     <input type="text" name="nama_petugas" class="form-control rounded-0" id="floatingInput" placeholder="name@example.com">
@@ -41,6 +41,11 @@
                     <label for="floatingInput">Telephone</label>
                 </div>
 
+                <div class="mb-3">
+                    <label for="image">Foto Profile</label>
+                    <input type="file" name="image" class="form-control rounded-0" id="floatingInput" placeholder="name@example.com">
+                </div>
+
                 <div class="form-check mb-3">
                     <input class="form-check-input" type="checkbox" onclick="myFunction()" id="autoSizingCheck2">
                     <label class="form-check-label">Show Password</label>
@@ -57,7 +62,7 @@
                 </div>
 
                 <div class="d-grid gap-2 mb-3">
-                    <button class="btn btn-primary" type="submit">Update</button>
+                    <button class="btn btn-primary" type="submit">Submit</button>
                 </div>
             </form>
         </div>

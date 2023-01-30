@@ -1,12 +1,12 @@
 @extends('layouts.mainlayout')
 
-@section('title', 'Dashboard')
+@section('title', 'Petugas Edit')
 
 @section('content')
 
-<h3 class=>Edit Masyarakat</h3>
+<h3 class=>Edit Petugas</h3>
 <div class="d-flex justify-content-start">
-    <a href="petugas-list" class="btn btn-primary">- Kembali</a>
+    <a href="/petugas-list" class="btn btn-primary">- Kembali</a>
 </div>
     <div class="row g-3 my-2 w-50">
         @if ($errors->any())
@@ -19,7 +19,7 @@
             </div>
         @endif
         <div>
-            <form action="/petugas-edit/{{ $petugas->slug }}" method="POST" class="mb-3">
+            <form action="/petugas-edit/{{ $petugas->slug }}" method="POST" class="mb-3" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="form-floating mb-3">
@@ -42,6 +42,20 @@
                     <label for="floatingInput">Telephone</label>
                 </div>
 
+                <div class="mb-3">
+                    <label for="floatingInput">Foto Profile</label>
+                    <input type="file" name="image" class="form-control rounded-0" id="floatingInput" placeholder="name@example.com">
+                </div>
+
+                <div class="mb-3">
+                    <label for="currentImage" class="form-label" style="display: block">Current Image</label>
+                    @if ($petugas->foto != '')
+                        <img src="{{ asset('storage/profile/petugas/'.$petugas->foto) }}" alt="" width="300px">
+                    @else
+                        <img src="{{ asset('images/user.png') }}" alt="" width="300px">
+                    @endif
+                </div>
+
                 <div class="form-check mb-3">
                     <input class="form-check-input" type="checkbox" onclick="myFunction()" id="autoSizingCheck2">
                     <label class="form-check-label">Show Password</label>
@@ -52,7 +66,6 @@
                         <option selected hidden>{{ $petugas->level }}</option>
                         <option value="admin">Admin</option>
                         <option value="petugas">Petugas</option>
-                        <option value="masyarakat">Masyarakat</option>
                     </select>
                     <label for="floatingSelect">Level</label>
                     <h6>Current Level: {{ $petugas->level }}</h6>
