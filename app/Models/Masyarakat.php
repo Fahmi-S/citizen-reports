@@ -20,7 +20,7 @@ class Masyarakat extends Warga
     protected $guard = 'masyarakat';
 
     protected $fillable = [
-        'nik', 'nama', 'slug', 'username', 'password','telp',
+        'nik', 'nama', 'slug', 'username', 'password', 'telp', 'foto',
     ];
 
     public function sluggable(): array
