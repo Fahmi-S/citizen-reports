@@ -21,7 +21,13 @@ class AuthController extends Controller
             'username' => ['required'],
             'password' => ['required'],
         ]);
+        // Awal pengecekan terjadi pada table masyarakat
+        // Jika session berasal dari table masyarakat maka sintaks dibawah ini dijalankan
+        if(Auth::guard('masyarakat')->attempt($credentials)){
+            return redirect('profile');
+        }
 
+        //Jika session berasal dari table admin maka sintaks dibawah ini dijalankan
         if(Auth::guard('admin')->attempt($credentials)){
             if (Auth::guard('admin')->user()->level == 'admin'){
                 return redirect('dashboard');
@@ -29,11 +35,7 @@ class AuthController extends Controller
                 return redirect('profile');
             }
         }
-
-        if(Auth::guard('masyarakat')->attempt($credentials)){
-            return redirect('profile');
-        }
-        
+                
         // Jika credentials/data tidak sesuai dengan yang ada di table munculkan error dan lempar kembali ke login
         Session::flash('status', 'failed');
         Session::flash('message', 'Login Gagal / Tidak Ditemukan Data');
@@ -56,17 +58,17 @@ class AuthController extends Controller
     public function registerProcess(Request $request)
     {
         $validated = $request->validate([
-            'nik' => 'required|unique:masyarakat|max:13',
-            'nama' => 'required|max:32',
-            'username' => 'required|unique:masyarakat|max:25',
-            'password' => 'required|min:3',
-            'telp' => 'required',
+            'nik'           => ['required','unique:masyarakat','max:13'],
+            'nama'          => ['required','max:32'],
+            'username'      => ['required','unique:masyarakat', 'unique:petugas','max:25'],
+            'password'      => ['required','min:3'],
+            'telp'          => ['required'],
         ]);
         //Hashing password
         $request['password'] = Hash::make($request->password);
         $masyarakat = Masyarakat::create($request->only('nik', 'nama', 'username', 'password', 'telp'));
         Session::flash('status', 'success');
         Session::flash('message', 'Registrasi Berhasil Dilakukan!');
-        return redirect('register');
+        return redirect('login');
     }
 }
