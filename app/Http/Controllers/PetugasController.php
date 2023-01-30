@@ -26,11 +26,22 @@ class PetugasController extends Controller
         $validated = $request->validate([
             'nama_petugas'      => ['required'],
             'username'          => ['required', 'unique:petugas', 'max:20'],
+            'image'             => ['mimes:jpg,png,jpeg,gif,svg'],
             'password'          => ['required'],
             'telp'              => ['required'],
             'level'             => ['required'],
         ]);
+
+        $newName = '';
+
+        if($request->file('image')){
+            $extension = $request->file('image')->getClientOriginalExtension();
+            $newName = $request->username.'-'.now()->timestamp.'.'.$extension;
+            $request->file('image')->storeAs('profile/petugas', $newName);
+        }
+
         // //proccess adding and encrypting password
+        $request['foto'] = $newName;
         $request['password'] = Hash::make($request->password);
         $petugas = Petugas::create($request->all());
         return redirect('petugas-list')->with('status', 'Data Berhasil Ditambahkan!');
@@ -48,10 +59,19 @@ class PetugasController extends Controller
         $validated = $request->validate([
             'nama_petugas'      => ['required'],
             'username'          => ['required', 'max:20', "unique:petugas,username,{$petugas->id}"],
+            'image'             => ['mimes:jpg,png,jpeg,gif,svg'],
             'password'          => ['required'],
             'telp'              => ['required'],
             'level'             => ['required'],
         ]);
+
+        if ($request->file('image')){
+            $extension = $request->file('image')->getClientOriginalExtension();
+            $newName = $request->username.'-'.now()->timestamp.'.'.$extension;
+            $request->file('image')->storeAs('profile/petugas', $newName);
+            $request['foto'] = $newName;
+        }
+
         $request['password'] = Hash::make($request->password);
         $petugas->slug = null;
         $petugas->update($request->all());
