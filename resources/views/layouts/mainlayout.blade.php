@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('css/dashboardstyle.css') }}">
-    <title>Pengaduan Masyarakat | @yield('title')</title>
+    <title>APM | @yield('title')</title>
 </head>
 
 <body>
@@ -112,7 +112,8 @@
                 <div class="d-flex align-items-center">
                     <i class="fas fa-align-left primary-text fs-4 me-3" id="menu-toggle"></i>
                     <h2 class="fs-2 m-0">
-                        @if (request()->route()->uri == 'profile')User
+                        @if (request()->route()->uri == 'profile' || request()->route()->uri == 'profile-edit')
+                        User
                         @elseif (request()->route()->uri == 'dashboard')Dashboard
                         @elseif (request()->route()->uri == 'petugas-list' || request()->route()->uri == 'petugas-add' || request()->route()->uri == 'petugas-deleted' || request()->route()->uri == 'petugas-edit/{slug}' || request()->route()->uri == 'petugas-delete/{slug}')
                         Petugas Manager

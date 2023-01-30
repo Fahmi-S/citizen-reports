@@ -1,6 +1,6 @@
 @extends('layouts.mainlayout')
 
-@section('title', 'Dashboard')
+@section('title', 'Masyarakat Deleted List')
 
 @section('content')
 

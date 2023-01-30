@@ -18,9 +18,9 @@
 
     <div class="px-4 py-3 mb-8 flex text-gray-800 bg-white rounded-lg shadow-md dark:bg-gray-800">
         <h1 class="text-center mb-8 font-semibold">Foto</h1>
-        <div class="relative hidden mr-3 d-flex justify-content-center md:block dark:text-gray-400">
+        <div class="my-3 d-flex justify-content-center">
             @foreach ($report as $item)
-            <img class=" h-32 w-35 " src="{{ asset('storage/foto/'.$item->foto) }}" />
+                <img width="500px" src="{{ asset('storage/foto/'.$item->foto) }}" />
             @endforeach
         </div>
         <div class="text-center flex-1 dark:text-gray-400">

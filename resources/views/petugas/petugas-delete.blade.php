@@ -1,6 +1,6 @@
 @extends('layouts.mainlayout')
 
-@section('title', 'Dashboard')
+@section('title', 'Delete Confirm')
 
 @section('content')
 <h2>Apakah anda yakin menghapus petugas : {{ $petugas->nama_petugas }}</h2>
