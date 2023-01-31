@@ -19,9 +19,6 @@ use App\Http\Controllers\MasyarakatController;
 |
 */
 
-
-
-
 Route::middleware(['only_guest'])->group(function () {
     //Login Controllers
     Route::get('/login', [AuthController::class, 'index'])->name('login');
@@ -54,6 +51,9 @@ Route::middleware(['auth:admin,masyarakat', 'only_admin'])->group(function () {
     Route::get('masyarakat-destroy/{slug}', [MasyarakatController::class, 'destroy']);
     Route::get('masyarakat-deleted', [MasyarakatController::class, 'deletedMasyarakat']);
     Route::get('masyarakat-restore/{slug}', [MasyarakatController::class, 'restore']);
+});
+
+Route::middleware(['auth:admin'])->group(function () {
     //Report
     Route::get('report-list', [ReportController::class, 'index']);
     Route::get('report-process/{id}', [ReportController::class, 'detail']);
