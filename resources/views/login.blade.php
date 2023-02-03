@@ -14,7 +14,7 @@
         <div class="row content d-flex justify-content-center align-items-center">
             <div class="col-md-5">
                 @if (session('status'))
-                    <div class="alert alert-danger text-center">  
+                    <div class="alert alert-success text-center">  
                         {{ session('message') }}
                     </div>            
                 @endif

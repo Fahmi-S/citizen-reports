@@ -4,7 +4,7 @@
 
 @section('content')
 
-<h3 class="text-center">Petugas List</h3>
+<h3 class="text-center">Petugas Deleted List</h3>
     <div class="d-flex justify-content-center">
         <a href="/petugas-list" class="btn btn-primary">- Kembali</a>
     </div>
