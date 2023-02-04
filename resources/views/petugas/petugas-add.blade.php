@@ -53,10 +53,8 @@
 
                 <div class="form-floating mb-3">
                     <select name="level" id="floatingSelect" class="form-select">
-                        <option selected hidden>Select Level</option>
-                        <option value="admin">Admin</option>
                         <option value="petugas">Petugas</option>
-                        <option value="masyarakat">Masyarakat</option>
+                        <option value="admin">Admin</option>
                     </select>
                     <label for="floatingSelect">Level</label>
                 </div>
