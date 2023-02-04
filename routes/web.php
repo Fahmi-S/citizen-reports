@@ -41,7 +41,7 @@ Route::middleware(['auth:admin,masyarakat', 'only_admin'])->group(function () {
     Route::get('petugas-destroy/{slug}', [PetugasController::class, 'destroy']);
     Route::get('petugas-deleted', [PetugasController::class, 'deletedPetugas']);
     Route::get('petugas-restore/{slug}', [PetugasController::class, 'restore']);
-    //Masyarakat
+    //Masyarakat Crud
     Route::get('masyarakat-list', [MasyarakatController::class, 'index']);
     Route::get('masyarakat-add', [MasyarakatController::class, 'add']);
     Route::post('masyarakat-add', [MasyarakatController::class, 'store']);
@@ -53,12 +53,19 @@ Route::middleware(['auth:admin,masyarakat', 'only_admin'])->group(function () {
     Route::get('masyarakat-restore/{slug}', [MasyarakatController::class, 'restore']);
 });
 
-Route::middleware(['auth:admin'])->group(function () {
-    //Report
+Route::middleware(['auth:admin,masyarakat', 'petugasadmin'])->group(function () {
+    //Report Status "0"
     Route::get('report-list', [ReportController::class, 'index']);
+
+    //Report Status "proses"
     Route::get('report-process/{id}', [ReportController::class, 'detail']);
     Route::put('report-process/{id}', [ReportController::class, 'process']);
     Route::get('report-process-list', [ReportController::class, 'processList']);
+
+    //Report Status "Selesai"
+    Route::get('report-finished-detail/{id}', [ReportController::class, 'finishedDetail']);
+    Route::put('report-finished-detail/{id}', [ReportController::class, 'finished']);
+    Route::get('report-finished-list', [ReportController::class, 'finishedList']);
 });
 
 Route::middleware(['auth:admin,masyarakat'])->group(function () {
@@ -66,7 +73,7 @@ Route::middleware(['auth:admin,masyarakat'])->group(function () {
     Route::get('/', function () {
     return view('welcome');
     });
-    //profile
+    //Profile
     Route::get('profile', [ProfileController::class, 'index']);
     Route::get('profile-edit', [ProfileController::class, 'edit']);
     Route::put('profile-edit', [ProfileController::class, 'update']);

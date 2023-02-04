@@ -58,6 +58,7 @@ class ReportController extends Controller
         ]);
         $tanggapan = Report::with('tanggapan')->get('id', $id);
         $tanggapan = Tanggapan::create([
+            'id'                => $id,
             'id_pengaduan'      => $id,
             'tgl_tanggapan'     => Carbon::now(),
             'tanggapan'         => $request['tanggapan'],
@@ -66,12 +67,39 @@ class ReportController extends Controller
         $id = Report::findOrFail($id);
         $id->status = 'proses';
         $id->update();
-        return redirect('report-list');
+        return redirect('report-process-list')->with('status', 'Data Berhasil Diproses');
     }
 
     public function processList()
     {
         $report = Report::with(['masyarakat','tanggapan'])->where('status', 'proses')->orderBy('created_at', 'DESC')->get();
         return view('report.report-process-list', ['report' => $report]);
+    }
+
+    public function finishedList()
+    {
+        $report = Report::with(['masyarakat', 'tanggapan'])->where('status', 'selesai')->orderBy('updated_at', 'DESC')->get(); 
+        return view('report.report-finished-list', ['report' => $report]);
+    }
+
+    public function finishedDetail($id)
+    {
+        $report = Report::with('tanggapan')->where('id', $id)->get();
+        return view('report.report-finished-detail', ['report' => $report]);
+    }
+
+    public function finished(Request $request, $id)
+    {
+        $tanggapan = Report::with('tanggapan')->get('id', $id);
+        $tanggapan = Tanggapan::where('id', $id)->update([
+            'id_pengaduan'      => $id,
+            'tgl_tanggapan'     => Carbon::now(),
+            'tanggapan'         => $request['tanggapan'],
+            'id_petugas'        => Auth::guard('admin')->user()->id,
+        ]);
+        $id = Report::findOrFail($id);
+        $id->status = 'selesai';
+        $id->update();
+        return redirect('report-finished-list')->with('status', 'Data berhasil diupdate!');
     }
 }

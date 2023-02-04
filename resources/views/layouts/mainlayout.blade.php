@@ -51,7 +51,7 @@
                     <a href="/report-process-list" class="list-group-item list-group-item-action bg-transparent second-text fw-bold fs-7">
                         <h6><li>Processing Report</li></h6>
                     </a>
-                    <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold fs-7">
+                    <a href="/report-finished-list" class="list-group-item list-group-item-action bg-transparent second-text fw-bold fs-7">
                         <h6><li>Finished Report</li></h6>
                     </a>
                 @endif

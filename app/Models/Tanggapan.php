@@ -11,6 +11,7 @@ class Tanggapan extends Model
     use HasFactory;
     protected $table = 'tanggapan';
     protected $fillable = [
+        'id',
         'id_pengaduan',
         'tgl_tanggapan',
         'tanggapan',

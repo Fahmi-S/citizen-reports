@@ -66,5 +66,6 @@ class Kernel extends HttpKernel
         'only_guest' => \App\Http\Middleware\OnlyGuest::class,
         'only_admin' => \App\Http\Middleware\OnlyAdmin::class,
         'only_masyarakat' => \App\Http\Middleware\OnlyMasyarakat::class,
+        'petugasadmin' => \App\Http\Middleware\PetugasAdmin::class,
     ];
 }
