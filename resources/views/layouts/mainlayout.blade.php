@@ -8,6 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('css/dashboardstyle.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
     <title>APM | @yield('title')</title>
 </head>
 
@@ -147,7 +148,6 @@
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="/profile">Profile</a></li>
-                                <li><a class="dropdown-item" href="#">Settings</a></li>
                                 <li><a class="dropdown-item" href="/logout">Logout</a></li>
                             </ul>
                         </li>
@@ -161,6 +161,32 @@
 
         </div>
     </div>
+    <footer class="d-flex flex-wrap justify-content-between align-items-center py-1 my-4 border-top">
+        <div class="col-md-4 d-flex align-items-center">
+        <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
+            <svg class="bi" width="30" height="24"><use xlink:href="#bootstrap"></use></svg>
+        </a>
+            <span class="mb-3 mb-md-0 text-muted">© 2023 Muhamnmad Fahmi</span>
+        </div>
+    
+        <ul class="nav col-md-4 justify-content-end list-unstyled d-flex me-3">
+            <li class="ms-3">
+                <a class="text-muted" href="https://twitter.com/MuhammadFahmi1S">
+                    <i class="bi bi-twitter"></i>
+                </a>
+            </li>
+            <li class="ms-3">
+                <a class="text-muted" href="https://www.instagram.com/kemitogame/">
+                    <i class="bi bi-instagram"></i>
+                </a>
+            </li>
+            <li class="ms-3">
+                <a class="text-muted" href="https://www.facebook.com/profile.php?id=100049896633872">
+                    <i class="bi bi-facebook"></i>
+                </a>
+            </li>
+        </ul>
+    </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> 
 
