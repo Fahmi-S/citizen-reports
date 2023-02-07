@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\PetugasController;
 use App\Http\Controllers\ProfileController;
@@ -82,6 +83,8 @@ Route::middleware(['auth:admin,masyarakat'])->group(function () {
     //Report
     Route::get('report-add', [ReportController::class, 'add'])->middleware('only_masyarakat');
     Route::post('report-add', [ReportController::class, 'store'])->middleware('only_masyarakat');
+    //Home
+    Route::get('home', [HomeController::class, 'index']);
 });
 
 

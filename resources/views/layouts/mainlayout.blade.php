@@ -17,7 +17,7 @@
 
         <div class="bg-white" id="sidebar-wrapper">
             <div class="sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase border-bottom">
-                <a href="#">Citizen Reports
+                <a href="/home">Citizen Reports
                 </a></div>
             <div class="list-group list-group-flush my-3">
                 @if (Auth::guard('masyarakat')->user())
@@ -121,6 +121,8 @@
                         Masyarakat Manager
                         @elseif(request()->route()->uri == 'report-list' || request()->route()->uri == 'report-process/{id}' || request()->route()->uri == 'report-process-list')
                         Report
+                        @elseif(request()->route()->uri == 'home')
+                        Home
                         @endif
                     </h2>
                 </div>
