@@ -24,7 +24,7 @@ class AuthController extends Controller
         // Awal pengecekan terjadi pada table masyarakat
         // Jika session berasal dari table masyarakat maka sintaks dibawah ini dijalankan
         if(Auth::guard('masyarakat')->attempt($credentials)){
-            return redirect('profile');
+            return redirect('home');
         }
 
         //Jika session berasal dari table admin maka sintaks dibawah ini dijalankan
@@ -32,7 +32,7 @@ class AuthController extends Controller
             if (Auth::guard('admin')->user()->level == 'admin'){
                 return redirect('dashboard');
             }else if(Auth::guard('admin')->user()->level == 'petugas') {
-                return redirect('profile');
+                return redirect('home');
             }
         }
                 

@@ -25,37 +25,36 @@ class ProfileController extends Controller
 
     public function update(Request $request)
     {
+        $validated = $request->validate([
+            'nama_petugas'      => ['max:35'],
+            'telp'              => ['max:13'],
+        ]);
         if(Auth::guard('admin')->user()){
             if ($request->file('image')){
                 $extension = $request->file('image')->getClientOriginalExtension();
-                $newName = $request->username.'-'.now()->timestamp.'.'.$extension;
+                $newName = $request->nama_petugas.'-'.now()->timestamp.'.'.$extension;
                 $request->file('image')->storeAs('profile/petugas', $newName);
                 $request['foto'] = $newName;
             }
 
             $petugas = Petugas::find(auth()->user()->id);
-            $validated = $request->validate([
-                'nama_petugas'      => ['max:35'],
-                'telp'              => ['max:13'],
-            ]);
             $petugas->update($request->only('nama_petugas', 'telp', 'foto'));
             return redirect('profile')->with('status', 'Data berhasil diupdate!');
-
         }
+
+        $validated = $request->validate([
+            'nama'              => ['max:35'],
+            'telp'              => ['max:13'],
+        ]);
 
         if(Auth::guard('masyarakat')->user()){
             if ($request->file('image')){
                 $extension = $request->file('image')->getClientOriginalExtension();
-                $newName = $request->username.'-'.now()->timestamp.'.'.$extension;
+                $newName = $request->nama.'-'.now()->timestamp.'.'.$extension;
                 $request->file('image')->storeAs('profile/masyarakat', $newName);
                 $request['foto'] = $newName;
             }
-
             $masyarakat = Masyarakat::find(auth()->user()->nik);
-            $validated = $request->validate([
-                'nama'              => ['max:35'],
-                'telp'              => ['max:13'],
-            ]);
             $masyarakat->update($request->only('nama', 'telp', 'foto'));
             return redirect('profile')->with('status', 'Data berhasil diupdate!');
         }
