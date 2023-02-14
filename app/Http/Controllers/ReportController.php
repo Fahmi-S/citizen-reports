@@ -102,4 +102,16 @@ class ReportController extends Controller
         $id->update();
         return redirect('report-finished-list')->with('status', 'Data berhasil diupdate!');
     }
+
+    public function recent()
+    {
+        return view('report.report-recent');
+    }
+
+    public function details($id)
+    {
+        $report = Report::with('tanggapan')->where('id', $id)->get();
+        $masyarakat = Report::with('masyarakat')->where('id', $id)->get();
+        return view('report.report-details', ['report' => $report, 'masyarakat' => $masyarakat]);
+    }
 }

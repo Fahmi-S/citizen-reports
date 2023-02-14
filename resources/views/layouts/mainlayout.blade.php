@@ -15,7 +15,6 @@
 <body>
     <div class="d-flex" id="wrapper">
         {{-- Sidebar Dimulai dari sini --}}
-
         <div class="bg-white" id="sidebar-wrapper">
             <div class="sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase border-bottom">
                 <a href="/home">Citizen Reports
@@ -95,6 +94,9 @@
                     <a href="/report-add" class="list-group-item list-group-item-action bg-transparent second-text fw-bold fs-7">
                         <h6><li>Make Report</li></h6>
                     </a>
+                    <a href="/recent-report" class="list-group-item list-group-item-action bg-transparent second-text fw-bold fs-7">
+                        <h6><li>Recent Report</li></h6>
+                    </a>
                 @elseif(Auth::guard('admin')->user());
 
                 @endif
@@ -120,39 +122,68 @@
                         Petugas Manager
                         @elseif(request()->route()->uri == 'masyarakat-list' || request()->route()->uri == 'masyarakat-add' || request()->route()->uri == 'masyarakat-edit' || request()->route()->uri == 'masyarakat-edit/{slug}' || request()->route()->uri == 'masyarakat-delete/{slug}' || request()->route()->uri == 'masyarakat-deleted')
                         Masyarakat Manager
-                        @elseif(request()->route()->uri == 'report-list' || request()->route()->uri == 'report-process/{id}' || request()->route()->uri == 'report-process-list')
+                        @elseif(request()->route()->uri == 'report-list' || request()->route()->uri == 'report-process/{id}' || request()->route()->uri == 'report-process-list' || request()->route()->uri == 'recent-report')
                         Report
                         @elseif(request()->route()->uri == 'home')
                         Home
                         @endif
                     </h2>
                 </div>
-
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle primary-text fw-bold" href="#" id="navbarDropdown"
-                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="fas fa-user me-2"></i>
-                                @if (Auth::guard('admin')->user())
-                                    {{Auth::guard('admin')->user()->nama_petugas}}
-                                @elseif(Auth::guard('masyarakat')->user())
-                                    {{Auth::guard('masyarakat')->user()->nama}}
-                                @endif
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="/profile">Profile</a></li>
-                                <li><a class="dropdown-item" href="/logout">Logout</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
+                @if (Auth::guard('masyarakat')->user())
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle primary-text fw-bold" href="#" id="navbarDropdown"
+                                    role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    @if (Auth::guard('masyarakat')->user()->foto != '')
+                                            <img class="rounded-circle" width="40px" src="{{ asset('storage/profile/masyarakat/'.Auth::guard('masyarakat')->user()->foto) }}">
+                                    @else
+                                            <img class="rounded-circle" width="40px" src="{{ asset('images/user.png') }}" alt="">
+                                    @endif
+                                    @if(Auth::guard('masyarakat')->user())
+                                        {{Auth::guard('masyarakat')->user()->nama}}
+                                    @endif
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" href="/profile">Profile</a></li>
+                                    <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                @elseif (Auth::guard('admin')->user())
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle primary-text fw-bold" href="#" id="navbarDropdown"
+                                    role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    @if (Auth::guard('admin')->user()->foto != '')
+                                            <img class="rounded-circle" width="40px" src="{{ asset('storage/profile/petugas/'.Auth::guard('admin')->user()->foto) }}">
+                                    @else
+                                            <img class="rounded-circle" width="40px" src="{{ asset('images/user.png') }}" alt="">
+                                    @endif
+                                    @if(Auth::guard('admin')->user())
+                                        {{Auth::guard('admin')->user()->nama_petugas}}
+                                    @endif
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" href="/profile">Profile</a></li>
+                                    <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                @endif
             </nav>
 
             <div class="container-fluid px-4">
@@ -161,12 +192,12 @@
 
         </div>
     </div>
-    <footer class="d-flex flex-wrap justify-content-between align-items-center py-1 my-4 border-top">
-        <div class="col-md-4 d-flex align-items-center">
+    <footer class="d-flex flex-wrap justify-content-between align-items-center border-top">
+        <div class="col-md-5 d-flex align-items-center">
         <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
             <svg class="bi" width="30" height="24"><use xlink:href="#bootstrap"></use></svg>
         </a>
-            <span class="mb-3 mb-md-0 text-muted">© 2023 Muhamnmad Fahmi</span>
+            <span class="mb-3 mb-md-0 text-muted">© 2023 Muhammad Fahmi</span>
         </div>
     
         <ul class="nav col-md-4 justify-content-end list-unstyled d-flex me-3">
