@@ -65,8 +65,15 @@ Route::middleware(['auth:admin,masyarakat', 'petugasadmin'])->group(function () 
 
     //Report Status "Selesai"
     Route::get('report-finished-detail/{id}', [ReportController::class, 'finishedDetail']);
-    Route::put('report-finished-detail/{id}', [ReportController::class, 'finished']);
+    Route::put('report-finished-detail/{id}', [ReportController::class, 'update']);
     Route::get('report-finished-list', [ReportController::class, 'finishedList']);
+
+    //Report detail
+    Route::get('report-detail/{id}', [ReportController::class, 'details']);
+
+    //Report delete
+    Route::get('report-delete/{id}', [ReportController::class, 'delete']);
+    Route::get('report-destroy/{id}', [ReportController::class, 'destroy']);
 });
 
 Route::middleware(['auth:admin,masyarakat'])->group(function () {
@@ -83,6 +90,7 @@ Route::middleware(['auth:admin,masyarakat'])->group(function () {
     //Report
     Route::get('report-add', [ReportController::class, 'add'])->middleware('only_masyarakat');
     Route::post('report-add', [ReportController::class, 'store'])->middleware('only_masyarakat');
+    Route::get('recent-report', [ReportController::class, 'recent'])->middleware('only_masyarakat');
     //Home
     Route::get('home', [HomeController::class, 'index']);
 });

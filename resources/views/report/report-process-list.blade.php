@@ -37,7 +37,8 @@
                         <td>{{ $item->tanggapan->tanggapan }}</td>
                         <td>{{ $item->status }}</td>
                         <td>
-                            <a href="/report-finished-detail/{{$item->id}}" class="btn btn-success">Done</a>
+                            <a href="/report-finished-detail/{{$item->id}}" class="btn btn-success">More</a>
+                            <a href="/report-delete/{{ $item->id }}" class="btn btn-danger">Hapus</a>
                         </td>
                     </tr>
                 @endforeach

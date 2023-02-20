@@ -8,6 +8,7 @@ use App\Models\Tanggapan;
 use App\Models\Masyarakat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Symfony\Component\Console\Input\Input;
 
 class ReportController extends Controller
 {
@@ -41,7 +42,7 @@ class ReportController extends Controller
 
     public function index()
     {
-        $report = Report::with('masyarakat')->where('status', '0')->orderBy('created_at', 'DESC')->get();
+        $report = Report::with('masyarakat')->where('status', '0')->orderBy('created_at', 'DESC')->paginate(10);
         return view('report.report-list', ['report' => $report]);
     }
 
@@ -72,13 +73,13 @@ class ReportController extends Controller
 
     public function processList()
     {
-        $report = Report::with(['masyarakat','tanggapan'])->where('status', 'proses')->orderBy('created_at', 'DESC')->get();
+        $report = Report::with(['masyarakat','tanggapan'])->where('status', 'proses')->orderBy('created_at', 'DESC')->paginate(10);
         return view('report.report-process-list', ['report' => $report]);
     }
 
     public function finishedList()
     {
-        $report = Report::with(['masyarakat', 'tanggapan'])->where('status', 'selesai')->orderBy('updated_at', 'DESC')->get(); 
+        $report = Report::with(['masyarakat', 'tanggapan'])->where('status', 'selesai')->orderBy('updated_at', 'DESC')->paginate(10); 
         return view('report.report-finished-list', ['report' => $report]);
     }
 
@@ -88,19 +89,43 @@ class ReportController extends Controller
         return view('report.report-finished-detail', ['report' => $report]);
     }
 
-    public function finished(Request $request, $id)
+    public function update(Request $request, $id)
     {
-        $tanggapan = Report::with('tanggapan')->get('id', $id);
-        $tanggapan = Tanggapan::where('id', $id)->update([
-            'id_pengaduan'      => $id,
-            'tgl_tanggapan'     => Carbon::now(),
-            'tanggapan'         => $request['tanggapan'],
-            'id_petugas'        => Auth::guard('admin')->user()->id,
-        ]);
-        $id = Report::findOrFail($id);
-        $id->status = 'selesai';
-        $id->update();
-        return redirect('report-finished-list')->with('status', 'Data berhasil diupdate!');
+        if($request['status'])
+        {
+            $validated = $request->validate([
+                'tanggapan'      => ['required'],
+            ]);
+            $tanggapan = Report::with('tanggapan')->get('id', $id);
+            $tanggapan = Tanggapan::where('id', $id)->update([
+                'id_pengaduan'      => $id,
+                'tgl_tanggapan'     => Carbon::now(),
+                'tanggapan'         => $request['tanggapan'],
+                'id_petugas'        => Auth::guard('admin')->user()->id,
+            ]);
+            $report = Report::where('id',$id)->update([
+                'status'            => $request['status'],
+            ]);
+
+            if(Report::where('status', '=', 'proses')->first()){
+                return redirect('report-process-list')->with('status', 'Data berhasil diupdate!');
+            }elseif(Report::where('status', '=', 'selesai')->first()){
+                return redirect('report-finished-list')->with('status', 'Data berhasil diupdate!');
+            }
+            
+        }elseif($request->only(['tanggapan'])){
+            $validated = $request->validate([
+                'tanggapan'      => ['required'],
+            ]);
+            $tanggapan = Report::with('tanggapan')->get('id', $id);
+            $tanggapan = Tanggapan::where('id', $id)->update([
+                'id_pengaduan'      => $id,
+                'tgl_tanggapan'     => Carbon::now(),
+                'tanggapan'         => $request['tanggapan'],
+                'id_petugas'        => Auth::guard('admin')->user()->id,
+            ]);
+            return redirect('report-process-list')->with('status', 'Data berhasil diupdate!');
+        }
     }
 
     public function recent()
@@ -113,5 +138,18 @@ class ReportController extends Controller
         $report = Report::with('tanggapan')->where('id', $id)->get();
         $masyarakat = Report::with('masyarakat')->where('id', $id)->get();
         return view('report.report-details', ['report' => $report, 'masyarakat' => $masyarakat]);
+    }
+
+    public function delete($id)
+    {
+        $report = Report::where('id', $id)->first();
+        return view('report.report-delete', ['report' => $report]);
+    }
+
+    public function destroy($id)
+    {
+        $report = Report::where('id', $id)->first();
+        $report->delete();
+        return redirect('report-list')->with('status', 'Data Berhasil Dihapus!');
     }
 }

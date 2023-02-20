@@ -30,18 +30,19 @@
             <tbody>
                 @foreach ($report as $item)
                     <tr>
-                        <th scope="row">{{ $loop->iteration }}</th>
+                        <th scope="row">{{ $loop->iteration + $report->firstItem()-1}}</th>
                         <td>{{ $item->nik }}</td>
                         <td>{{ $item->masyarakat->nama }}</td>
                         <td>{{ $item->tanggapan->created_at }}</td>
                         <td>{{ $item->tanggapan->tanggapan }}</td>
                         <td>{{ $item->status }}</td>
                         <td>
-                            <a href="/report-finished-detail/{{$item->id}}" class="btn btn-success">Detail</a>
+                            <a href="/report-detail/{{$item->id}}" class="btn btn-success">Detail</a>
                         </td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
+        {{$report->withQueryString()->links()}}
     </div>
 @endsection
