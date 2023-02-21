@@ -48,7 +48,7 @@
                 @endforeach
             </tbody>
         </table>
-        <div class="me-3">   
+        <div class="mx-3">   
             {{$masyarakat->withQueryString()->links()}}
         </div>
     </div>
