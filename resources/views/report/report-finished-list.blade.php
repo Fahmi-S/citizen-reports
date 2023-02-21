@@ -1,10 +1,10 @@
 @extends('layouts.mainlayout')
 
-@section('title', 'Report Process List')
+@section('title', 'Report Finished List')
 
 @section('content')
 
-<h3 class="text-center">Report Process List</h3>
+<h3 class="text-center">Report Finished List</h3>
 
     <div class="mt-5">
         @if(session('status'))
@@ -12,6 +12,10 @@
                 {{ session('status') }}
             </div>
         @endif
+    </div>
+
+    <div class="my-3">
+        <a href="/report-finished-pdf" target="_blank" class="btn btn-primary">Print PDF</a>
     </div>
 
     <div class="my-4 bg-white rounded shadow-sm table-hover table-responsive text-center">
@@ -43,6 +47,8 @@
                 @endforeach
             </tbody>
         </table>
-        {{$report->withQueryString()->links()}}
+        <div class="me-3">   
+            {{$report->withQueryString()->links()}}
+        </div>
     </div>
 @endsection

@@ -31,7 +31,7 @@
             <tbody>
                 @foreach ($deletedMasyarakat as $item)
                     <tr>
-                        <th scope="row">{{ $loop->iteration }}</th>
+                        <th scope="row">{{ $loop->iteration + $deletedMasyarakat->firstItem()-1}}</th>
                         <td>{{ $item->nik}}</td>
                         <td>{{ $item->nama }}</td>
                         <td>{{ $item->username }}</td>
@@ -43,5 +43,8 @@
                 @endforeach
             </tbody>
         </table>
+        <div class="me-3">   
+            {{$deletedMasyarakat->withQueryString()->links()}}
+        </div>
     </div>
 @endsection

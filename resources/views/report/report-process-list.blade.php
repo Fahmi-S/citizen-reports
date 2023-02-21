@@ -14,6 +14,10 @@
         @endif
     </div>
 
+    <div class="my-3">
+        <a href="/report-process-pdf" target="_blank" class="btn btn-primary">Print PDF</a>
+    </div>
+
     <div class="my-4 bg-white rounded shadow-sm table-hover table-responsive text-center">
         <table class="table">
             <thead>
@@ -30,7 +34,7 @@
             <tbody>
                 @foreach ($report as $item)
                     <tr>
-                        <th scope="row">{{ $loop->iteration }}</th>
+                        <th scope="row">{{ $loop->iteration + $report->firstItem()-1}}</th>
                         <td>{{ $item->nik }}</td>
                         <td>{{ $item->masyarakat->nama }}</td>
                         <td>{{ $item->tanggapan->created_at }}</td>
@@ -44,5 +48,8 @@
                 @endforeach
             </tbody>
         </table>
+        <div class="me-3">   
+            {{$report->withQueryString()->links()}}
+        </div>
     </div>
 @endsection

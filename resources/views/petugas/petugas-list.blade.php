@@ -35,7 +35,7 @@
             <tbody>
                 @foreach ($petugas as $item)
                     <tr>
-                        <th scope="row">{{ $loop->iteration }}</th>
+                        <th scope="row">{{ $loop->iteration + $petugas->firstItem()-1}}</th>
                         <td>{{ $item->nama_petugas}}</td>
                         <td>{{ $item->username }}</td>
                         <td>{{ $item->telp }}</td>
@@ -48,5 +48,8 @@
                 @endforeach
             </tbody>
         </table>
+        <div class="me-3">   
+            {{$petugas->withQueryString()->links()}}
+        </div>
     </div>
 @endsection
