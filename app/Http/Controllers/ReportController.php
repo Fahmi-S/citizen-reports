@@ -129,13 +129,13 @@ class ReportController extends Controller
 
     public function recent()
     {
-        return view('report.report-recent');
+        $report = Report::with(['masyarakat','tanggapan'])->where('nik', (auth()->user()->nik))->orderBy('created_at', 'DESC')->paginate(10);
+        return view('report.recent-report', ['report' => $report]);
     }
 
     public function details($id)
     {
-        $report = Report::with('tanggapan')->where('id', $id)->get();
-        $masyarakat = Report::with('masyarakat')->where('id', $id)->get();
+        $report = Report::with(['masyarakat','tanggapan'])->where('id', $id)->get();
         return view('report.report-details', ['report' => $report, 'masyarakat' => $masyarakat]);
     }
 
@@ -151,4 +151,6 @@ class ReportController extends Controller
         $report->delete();
         return redirect('report-list')->with('status', 'Data Berhasil Dihapus!');
     }
+
+    
 }
