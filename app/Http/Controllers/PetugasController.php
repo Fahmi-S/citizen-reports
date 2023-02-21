@@ -11,7 +11,7 @@ class PetugasController extends Controller
     public function index()
     {
         //filtering hanya petugas yang diambil datanya
-        $petugas = Petugas::where('level', 'petugas')->get();
+        $petugas = Petugas::where('level', 'petugas')->paginate(10);
         return view('petugas.petugas-list', ['petugas' => $petugas]);
     }
     
@@ -93,7 +93,7 @@ class PetugasController extends Controller
 
     public function deletedPetugas()
     {
-        $deletedPetugas = Petugas::onlyTrashed()->get();
+        $deletedPetugas = Petugas::onlyTrashed()->paginate(10);
         return view('petugas.petugas-deleted-list', ['deletedPetugas' => $deletedPetugas]);
     }
 

@@ -13,7 +13,7 @@ class MasyarakatController extends Controller
 {
     public function index()
     {
-        $masyarakat = Masyarakat::all();
+        $masyarakat = Masyarakat::paginate(10);
         return view('masyarakat.masyarakat-list', ['masyarakat' => $masyarakat]);
     }
     
@@ -93,7 +93,7 @@ class MasyarakatController extends Controller
 
     public function deletedMasyarakat()
     {
-        $deletedMasyarakat = Masyarakat::onlyTrashed()->get();
+        $deletedMasyarakat = Masyarakat::onlyTrashed()->paginate(10);
         return view('masyarakat.masyarakat-deleted-list', ['deletedMasyarakat' => $deletedMasyarakat]);
     }
 
