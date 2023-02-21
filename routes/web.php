@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PdfController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ReportController;
@@ -52,6 +53,13 @@ Route::middleware(['auth:admin,masyarakat', 'only_admin'])->group(function () {
     Route::get('masyarakat-destroy/{slug}', [MasyarakatController::class, 'destroy']);
     Route::get('masyarakat-deleted', [MasyarakatController::class, 'deletedMasyarakat']);
     Route::get('masyarakat-restore/{slug}', [MasyarakatController::class, 'restore']);
+    //Report PDF
+    Route::get('pdf-finished', [PdfController::class, 'finishedList']);
+    Route::get('report-finished-pdf', [PdfController::class, 'createFinishedPDF']);
+    Route::get('pdf-process', [PdfController::class, 'processList']);
+    Route::get('report-process-pdf', [PdfController::class, 'createProcessPDF']);
+    Route::get('pdf-decline', [PdfController::class, 'declineList']);
+    Route::get('report-decline-pdf', [PdfController::class, 'createDeclinePDF']);
 });
 
 Route::middleware(['auth:admin,masyarakat', 'petugasadmin'])->group(function () {
