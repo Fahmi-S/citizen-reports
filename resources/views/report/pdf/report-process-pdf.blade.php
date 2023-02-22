@@ -65,7 +65,6 @@
 						<th scope="col">Isi Aduan</th>
 						<th scope="col">Photo Pendukung</th>
 						<th scope="col">Status</th>
-						<th scope="col">Tanggapan</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -77,8 +76,7 @@
 							<td>{{ $item->masyarakat->nama }}</td>
 							<td>{{ $item->isi_laporan }}</td>
 							<td><img width="50px" src="{{ storage_path('app/public/foto/'.$item->foto) }}" alt=""></td>
-							<td>{{ $item->status }}</td>
-							<td>{{ $item->tanggapan->tanggapan ?? ''}}</td>
+							<td>{{ $item->status = 'Sedang Diproses'}}</td>
 						</tr>
 					@endforeach
 				</tbody>

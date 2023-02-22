@@ -76,7 +76,7 @@
 							<td>{{ $item->masyarakat->nama }}</td>
 							<td>{{ $item->isi_laporan }}</td>
 							<td><img width="50px" src="{{ storage_path('app/public/foto/'.$item->foto) }}" alt=""></td>
-							<td>{{ $item->status }}</td>
+							<td>{{ $item->status = 'Ditolak'}}</td>
 						</tr>
 					@endforeach
 				</tbody>

@@ -31,20 +31,9 @@
                 @endforeach
             </p>
             <hr>
-            <form action="/report-process/{{ $item->id }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                @method('POST')
-                <div class="my-3">
-                    <label for="floatingInput">Tanggapan</label>
-                    <textarea name="tanggapan" id="floatingInput" rows="3" class="form-control" placeholder="Silahkan Isi Tanggapan Petugas..."></textarea>
-                </div>
-                @method('PUT')
-                <div class="my-3">
-                    @foreach ($report as $item)
-                        <button type="submit" class="btn btn-warning">Process</button>
-                    @endforeach
-                </div>
-            </form>
+            <div class="my-3">
+                <a href="/report-list" class="btn btn-danger">Kembali</a>
+            </div>
         </div>
     </div>
 @endsection

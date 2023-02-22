@@ -9,17 +9,26 @@
             Detail Pengaduan
         </h2>
         
+        @if (Auth::guard('admin')->user()->level == 'admin')
+            <div class="d-flex justify-content-center my-2">
+                <button class="btn btn-danger">Export To PDF</button>
+            </div>
+        @else
+        
+        @endif
+        
         <div class="px-4 py-3 mb-8 flex text-gray-800 bg-white rounded-lg shadow-md dark:bg-gray-800">
-            
+            <hr>
             <div>
-                @foreach ($masyarakat as $item)
+                @foreach ($report as $item)
                     <h3>Nama : {{ $item->masyarakat->nama }}</h3>
                     <h3>Nik  : {{ $item->masyarakat->nik }}</h3>
                     <h3>Telp : {{ $item->masyarakat->telp }}</h3>
                     <h3>Tgl Pengaduan : {{ $item->created_at->format('l, d F Y - H:i:s') }}</h3>
-                    <h3>Status : {{ $item->status }}</h3>
+                    <h3>Status : {{ $item->status = 'Selesai' }}</h3>
                 @endforeach
             </div>
+            <hr>
             <h1 class="text-center mb-8 font-semibold">Foto</h1>
             <div class="my-3 d-flex justify-content-center">
                 @foreach ($report as $item)
@@ -27,30 +36,43 @@
                 @endforeach
             </div>
             <div class="text-center flex-1 dark:text-gray-400">
-                <h3 class="mb-8 font-semibold">Keterangan</h3>
+            <h3 class="mb-8 font-semibold">Keterangan</h3>
+            <p class="text-gray-800 dark:text-gray-400">
+                @foreach ($report as $item)
+                    {{ $item->isi_laporan }}
+                @endforeach
+            </p>
+            <hr>
+                <h3 class="mb-8 font-semibold">Tanggapan</h3>
                 <p class="text-gray-800 dark:text-gray-400">
                     @foreach ($report as $item)
-                        {{ $item->isi_laporan }}
+                    @foreach ($item->tanggapan as $ite)
+                    <div class="container">
+                        <div class="row d-flex justify-content-center">
+                            <div class="col-md-12 col-lg-10 col-xl-8">
+                            <div class="card my-3">
+                                <div class="card-body">
+                                    <p class="mt-3 mb-4 pb-2">
+                                        {{ $ite->tanggapan }}
+                                    </p>
+                                    <small>
+                                        {{ $ite->created_at->format('l, d F Y - H:i:s') }}
+                                    </small>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
                     @endforeach
+                @endforeach
                 </p>
-                <hr>
-            <form action="/report-finished-detail/{{ $item->id }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                @method('PUT')
-                <div class="my-3">
-                    <h3 class="mb-8 font-semibold">Tanggapan</h3>
-                    <p class="text-gray-800 dark:text-gray-400">
-                        @foreach ($report as $item)
-                            {{ $item->tanggapan->tanggapan }}
-                        @endforeach
-                    </p>
-                </div>
-                
-            </form>
+            </div>
+            <hr>
+            <div class="my-3 d-flex justify-content-center">
+                <a href="/report-finished-list" class="btn btn-danger">Kembali</a>
+            </div>
         </div>
     </div>
-    <div class="d-flex justify-content-start my-2">
-        <button class="btn btn-danger">Export To PDF</button>
-    </div>
+    <br>
 </main>
 @endsection

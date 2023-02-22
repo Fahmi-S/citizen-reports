@@ -24,6 +24,6 @@ class Report extends Model
 
     public function tanggapan()
     {
-        return $this->hasOne(Tanggapan::class, 'id_pengaduan', 'id');
+        return $this->hasMany(Tanggapan::class, 'id_pengaduan', 'id');
     }
 }

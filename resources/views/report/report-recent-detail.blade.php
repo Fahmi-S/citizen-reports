@@ -3,6 +3,10 @@
 @section('title', 'Report Detail')
 
 @section('content')
+@foreach ($report as $item)
+@if (Auth::guard('masyarakat')->user()->nik != $item->nik)
+    <a href="/recent-report" class="btn btn-danger">Kembali</a>
+@else
     <h2 class="text-center">
         Report Details
     </h2>
@@ -15,8 +19,8 @@
             </ul>
         </div>
     @endif
-    
-    
+
+
     <div class="px-4 py-3 mb-8 flex text-gray-800 bg-white rounded-lg shadow-md dark:bg-gray-800">
         <h1 class="text-center mb-8 font-semibold">Foto</h1>
         <div class="my-3 d-flex justify-content-center">
@@ -59,20 +63,15 @@
                 </p>
             </div>
             <hr>
-            <form action="/report-finished-detail/{{ $item->id }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                <div class="my-3">
-                    <label for="floatingInput" class="fs-4 semi-bold">Tanggapan</label>
-                    <textarea name="tanggapan" id="floatingInput" rows="3" class="form-control" placeholder="Silahkan Isi Tanggapan Petugas..."></textarea>
-                </div>
-                <div class="my-3">
-                    <button type="submit" class="btn btn-primary">Tanggapi</button>
-                    <a href="/report-process-list" class="btn btn-danger">Kembali</a>
-                </div>
-            </form>
+            <div class="my-3">
+                <a href="/recent-report" class="btn btn-danger">Kembali</a>
+            </div>
         </div>
     </div>
     <div>
         <br>
     </div>
+@endif
+@endforeach
+
 @endsection

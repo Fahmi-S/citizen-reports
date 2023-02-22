@@ -15,6 +15,8 @@ class Tanggapan extends Model
         'id_pengaduan',
         'tgl_tanggapan',
         'tanggapan',
+        'created_at',
+        'updated_at',
         'id_petugas',
     ];
 

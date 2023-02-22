@@ -1,13 +1,15 @@
+html
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>PDF</title>
 	<style>
-		@page { size: A4 }
-  
+	@page { size: A4 }
+
 	h1 {
 		font-weight: bold;
 		font-size: 20pt;
@@ -58,13 +60,13 @@
 			<table class="table">
 				<thead>
 					<tr>
-						<th scope="col" width="50">No.</th>
-						<th scope="col">Tanggal</th>
-						<th scope="col">NIK</th>
-						<th scope="col">Nama Masyarakat</th>
-						<th scope="col">Isi Aduan</th>
-						<th scope="col">Photo Pendukung</th>
-						<th scope="col">Status</th>
+						<th width="50">No.</th>
+						<th>Tanggal</th>
+						<th>NIK</th>
+						<th>Nama Masyarakat</th>
+						<th>Isi Aduan</th>
+						<th>Photo Pendukung</th>
+						<th>Status</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -76,7 +78,7 @@
 							<td>{{ $item->masyarakat->nama }}</td>
 							<td>{{ $item->isi_laporan }}</td>
 							<td><img width="50px" src="{{ storage_path('app/public/foto/'.$item->foto) }}" alt=""></td>
-							<td>{{ $item->status }}</td>
+							<td>{{ $item->status = 'Selesai'}}</td>
 						</tr>
 					@endforeach
 				</tbody>
