@@ -48,8 +48,11 @@
                     <a href="/report-list" class="list-group-item list-group-item-action bg-transparent second-text fw-bold fs-7">
                         <h6><li>Incoming Report</li></h6>
                     </a>
+                    <a href="/report-decline-list" class="list-group-item list-group-item-action bg-transparent second-text fw-bold fs-7">
+                        <h6><li>Declined Report</li></h6>
+                    </a>
                     <a href="/report-process-list" class="list-group-item list-group-item-action bg-transparent second-text fw-bold fs-7">
-                        <h6><li>Processing Report</li></h6>
+                        <h6><li>Processed Report</li></h6>
                     </a>
                     <a href="/report-finished-list" class="list-group-item list-group-item-action bg-transparent second-text fw-bold fs-7">
                         <h6><li>Finished Report</li></h6>
@@ -122,7 +125,7 @@
                         Petugas Manager
                         @elseif(request()->route()->uri == 'masyarakat-list' || request()->route()->uri == 'masyarakat-add' || request()->route()->uri == 'masyarakat-edit' || request()->route()->uri == 'masyarakat-edit/{slug}' || request()->route()->uri == 'masyarakat-delete/{slug}' || request()->route()->uri == 'masyarakat-deleted')
                         Masyarakat Manager
-                        @elseif(request()->route()->uri == 'report-list' || request()->route()->uri == 'report-process/{id}' || request()->route()->uri == 'report-process-list' || request()->route()->uri == 'recent-report')
+                        @elseif(request()->route()->uri == 'report-list' || request()->route()->uri == 'report-process/{id}' || request()->route()->uri == 'report-process-list' || request()->route()->uri == 'recent-report' || request()->route()->uri == 'report-add'  || request()->route()->uri == 'report-decline-list' || request()->route()->uri == 'report-finished-list' || request()->route()->uri == 'report-details/{id}' || request()->route()->uri == 'report-detail/{id}' || request()->route()->uri == 'report-finished-detail/{id}' || request()->route()->uri == 'report-recent-detail/{id}')
                         Report
                         @elseif(request()->route()->uri == 'home')
                         Home
