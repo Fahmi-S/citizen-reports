@@ -46,7 +46,7 @@ class PdfController extends Controller
     {
         $report = Report::with('tanggapan')->where('status', '=', '0')->get();
         view()->share('report', $report);
-        $pdf = PDF::loadView('report.pdf.report-process-pdf',['report' =>$report]);
+        $pdf = PDF::loadView('report.pdf.report-decline-pdf',['report' =>$report]);
         return $pdf->stream("pdf_file.pdf", array("Attachment" => false));
     }
 }
