@@ -28,7 +28,7 @@ class MasyarakatController extends Controller
             'nik'               => ['required', 'unique:masyarakat', 'max:13'],
             'nama'              => ['required', 'max:32'],
             'username'          => ['required', 'unique:masyarakat', 'unique:petugas', 'max:25'],
-            'image'             => ['mimes:jpg,png,jpeg,gif,svg'],
+            'image'             => ['mimes:jpg,png,jpeg'],
             'password'          => ['required', 'min:3'],
             'telp'              => ['required'],
         ]);
@@ -60,7 +60,7 @@ class MasyarakatController extends Controller
             'nik'               => ['required', "unique:masyarakat,nik,{$masyarakat->nik},nik", 'max:16'],
             'nama'              => ['required', 'max:32'],
             'username'          => ['required', "unique:masyarakat,username,{$masyarakat->nik},nik", 'max:25'], 'unique:petugas',
-            'image'             => ['mimes:jpg,png,jpeg,gif,svg'],
+            'image'             => ['mimes:jpg,png,jpeg'],
             'password'          => ['required','min:3'],
             'telp'              => ['required'],
         ]);

@@ -26,7 +26,7 @@ class PetugasController extends Controller
         $validated = $request->validate([
             'nama_petugas'      => ['required'],
             'username'          => ['required', 'unique:petugas', 'unique:masyarakat', 'max:20'],
-            'image'             => ['mimes:jpg,png,jpeg,gif,svg'],
+            'image'             => ['mimes:jpg,png,jpeg'],
             'password'          => ['required'],
             'telp'              => ['required'],
             'level'             => ['required'],
@@ -59,7 +59,7 @@ class PetugasController extends Controller
         $validated = $request->validate([
             'nama_petugas'      => ['required'],
             'username'          => ['required', 'max:20', "unique:petugas,username,{$petugas->id}", 'unique:masyarakat'],
-            'image'             => ['mimes:jpg,png,jpeg,gif,svg'],
+            'image'             => ['mimes:jpg,png,jpeg'],
             'password'          => ['required'],
             'telp'              => ['required'],
             'level'             => ['required'],
