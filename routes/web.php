@@ -63,21 +63,23 @@ Route::middleware(['auth:admin,masyarakat', 'only_admin'])->group(function () {
 });
 
 Route::middleware(['auth:admin,masyarakat', 'petugasadmin'])->group(function () {
-    //Report Status "0"
+    //Report Status Null / Belum diverval
     Route::get('report-list', [ReportController::class, 'index']);
+    //Report Status "0" / Ditolak
+    Route::get('report-decline-list', [ReportController::class, 'declineList']);
 
     //Report Status "proses"
-    Route::get('report-process/{id}', [ReportController::class, 'detail']);
-    Route::put('report-process/{id}', [ReportController::class, 'process']);
+    Route::get('report-detail/{id}', [ReportController::class, 'detail']);
+    Route::put('report-process/{id}', [ReportController::class, 'verval']);
     Route::get('report-process-list', [ReportController::class, 'processList']);
 
     //Report Status "Selesai"
     Route::get('report-finished-detail/{id}', [ReportController::class, 'finishedDetail']);
-    Route::put('report-finished-detail/{id}', [ReportController::class, 'update']);
+    Route::post('report-finished-detail/{id}', [ReportController::class, 'update']);
     Route::get('report-finished-list', [ReportController::class, 'finishedList']);
 
     //Report detail
-    Route::get('report-detail/{id}', [ReportController::class, 'details']);
+    Route::get('report-details/{id}', [ReportController::class, 'details']);
 
     //Report delete
     Route::get('report-delete/{id}', [ReportController::class, 'delete']);
@@ -99,6 +101,7 @@ Route::middleware(['auth:admin,masyarakat'])->group(function () {
     Route::get('report-add', [ReportController::class, 'add'])->middleware('only_masyarakat');
     Route::post('report-add', [ReportController::class, 'store'])->middleware('only_masyarakat');
     Route::get('recent-report', [ReportController::class, 'recent'])->middleware('only_masyarakat');
+    Route::get('report-recent-detail/{id}', [ReportController::class, 'recentDetail'])->middleware('only_masyarakat');
     //Home
     Route::get('home', [HomeController::class, 'index']);
 });
