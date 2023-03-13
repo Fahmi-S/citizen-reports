@@ -4,9 +4,15 @@
 
 @section('content')
 
-<h3 class="text-center">Report Incoming List</h3>
+<h3 class="text-center">Report List</h3>
 
+    @if (Auth::guard('admin')->user()->level == 'admin')
+        <div class="my-3">
+            <a href="/report-pdf" target="_blank" class="btn btn-primary">Print PDF</a>
+        </div>
+    @else
 
+    @endif
 
     <div class="mt-5">
         @if(session('status'))
@@ -23,7 +29,7 @@
                     <th scope="col" width="50">No.</th>
                     <th>NIK</th>
                     <th >Nama</th>
-                    <th>Tanggal / Jam</th>
+                    <th>Tanggal & Jam</th>
                     <th>Status</th>
                     <th>Verval Status</th>
                     <th>Action</th>
@@ -36,7 +42,18 @@
                         <td>{{ $item->nik }}</td>
                         <td>{{ $item->masyarakat->nama }}</td>
                         <td>{{ $item->created_at }}</td>
-                        <td><p class="badge text-bg-info">Belum Diverval</p></td>
+                        <td>
+                            @if ($item->status == '')
+                                <p class="badge text-bg-info">Belum Diverval</p>
+                            @elseif($item->status == '0')
+                                <p class="badge text-bg-danger">Ditolak</p>
+                            @elseif($item->status == 'proses')
+                                <p class="badge text-bg-warning">Sedang Di Proses</p>
+                            @elseif($item->status == 'selesai')
+                                <p class="badge text-bg-success">Selesai</p>
+                            @endif
+                            
+                        </td>
                         <td>
                             <form action="/report-process/{{ $item->id }}" method="POST" enctype="multipart/form-data">
                                 @csrf
@@ -47,7 +64,8 @@
                             </form>
                         </td>
                         <td>
-                            <a href="/report-detail/{{ $item->id }}" class="btn btn-warning">Detail</a>
+                            {{-- <a href="/report-recent-detail/{{ $item->id }}" class="btn btn-info">Detail</a> --}}
+                            <a href="/report-detail/{{ $item->id }}" class="btn btn-info">Detail</a>
                         </td>
                     </tr>
                 @endforeach
