@@ -60,6 +60,8 @@ Route::middleware(['auth:admin,masyarakat', 'only_admin'])->group(function () {
     Route::get('report-process-pdf', [PdfController::class, 'createProcessPDF']);
     Route::get('pdf-decline', [PdfController::class, 'declineList']);
     Route::get('report-decline-pdf', [PdfController::class, 'createDeclinePDF']);
+    Route::get('pdf-list', [PdfController::class, 'list']);
+    Route::get('report-pdf', [PdfController::class, 'createList']);
 });
 
 Route::middleware(['auth:admin,masyarakat', 'petugasadmin'])->group(function () {
@@ -101,7 +103,7 @@ Route::middleware(['auth:admin,masyarakat'])->group(function () {
     Route::get('report-add', [ReportController::class, 'add'])->middleware('only_masyarakat');
     Route::post('report-add', [ReportController::class, 'store'])->middleware('only_masyarakat');
     Route::get('recent-report', [ReportController::class, 'recent'])->middleware('only_masyarakat');
-    Route::get('report-recent-detail/{id}', [ReportController::class, 'recentDetail'])->middleware('only_masyarakat');
+    Route::get('report-recent-detail/{id}', [ReportController::class, 'recentDetail']);
     //Home
     Route::get('home', [HomeController::class, 'index']);
 });
