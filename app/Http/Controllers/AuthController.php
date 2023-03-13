@@ -27,6 +27,7 @@ class AuthController extends Controller
             return redirect('home');
         }
 
+        
         //Jika session berasal dari table admin maka sintaks dibawah ini dijalankan
         if(Auth::guard('admin')->attempt($credentials)){
             if (Auth::guard('admin')->user()->level == 'admin'){
