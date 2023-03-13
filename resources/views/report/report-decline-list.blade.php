@@ -46,7 +46,7 @@
                         <td>{{ $item->updated_at->format('l d F Y - H:i:s') }}</td>
                         <td><p class="badge text-bg-danger">{{ $item->status = 'Ditolak' }}</p></td>
                         <td>
-                            <a href="/report-process/{{ $item->id }}" class="btn btn-danger">Hapus</a>
+                            <a href="/report-detail/{{ $item->id }}" class="btn btn-info">Detail</a>
                         </td>
                     </tr>
                 @endforeach

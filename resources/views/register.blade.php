@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="{{ asset('logo/logo.png') }}" >
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -33,32 +34,32 @@
                     <form action="" method="POST" class="mb-3">
                         @csrf
                         <div class="form-floating mb-3">
-                            <input type="text" name="nik" class="form-control rounded-0" id="floatingInput" placeholder="name@example.com">
+                            <input type="text" name="nik" class="form-control rounded-0" id="floatingInput" placeholder="Nik" value="{{ old('nik') }}">
                             <label for="floatingInput">NIK</label>
                         </div>
 
                         <div class="form-floating mb-3">
-                            <input type="text" name="nama" class="form-control rounded-0" id="floatingInput" placeholder="name@example.com">
+                            <input type="text" name="nama" class="form-control rounded-0" id="floatingInput" placeholder="Nama" value="{{ old('nama') }}">
                             <label for="floatingInput">Nama</label>
                         </div>
 
                         <div class="form-floating mb-3">
-                            <input type="text" name="username" class="form-control rounded-0" id="floatingInput" placeholder="name@example.com">
+                            <input type="text" name="username" class="form-control rounded-0" id="floatingInput" placeholder="Username" value="{{ old('nama') }}">
                             <label for="floatingInput">Username</label>
                         </div>
 
                         <div class="form-floating mb-3">
-                            <input type="password" name="password" class="form-control rounded-0" id="floatingPassword" placeholder="Password...">
+                            <input type="password" name="password" class="form-control rounded-0" id="floatingPassword" placeholder="Password..." value="{{ old('nama') }}">
                             <label for="floatingPassword">Password</label>
                         </div>
 
                         <div class="form-floating mb-3">
-                            <input type="text" name="telp" class="form-control rounded-0" id="floatingInput" placeholder="name@example.com">
+                            <input type="text" name="telp" class="form-control rounded-0" id="floatingInput" placeholder="Telephone" value="{{ old('nama') }}">
                             <label for="floatingInput">Telephone</label>
                         </div>
 
                         <div class="form-check mb-3">
-                            <input class="form-check-input" type="checkbox" onclick="myFunction()" id="autoSizingCheck2">
+                            <input class="form-check-input" type="checkbox" onclick="myFunction()" id="autoSizingCheck2" value="{{ old('nama') }}">
                             <label class="form-check-label">Show Password</label>
                         </div>
 

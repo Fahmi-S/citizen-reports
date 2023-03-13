@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="{{ asset('logo/logo.png') }}" >
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -46,7 +47,7 @@
                         <i class="fa-solid fa-user-shield"> Report</i>
                     </h5>
                     <a href="/report-list" class="list-group-item list-group-item-action bg-transparent second-text fw-bold fs-7">
-                        <h6><li>Incoming Report</li></h6>
+                        <h6><li>Report List</li></h6>
                     </a>
                     <a href="/report-decline-list" class="list-group-item list-group-item-action bg-transparent second-text fw-bold fs-7">
                         <h6><li>Declined Report</li></h6>
@@ -84,9 +85,6 @@
                     <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold fs-7">
                         <h6><li>PDF</li></h6>
                     </a>
-                    <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold fs-7">
-                        <h6><li>Excel</li></h6>
-                    </a>
                 @endif
 
                 @if (Auth::guard('masyarakat')->user())
@@ -103,7 +101,6 @@
                 @elseif(Auth::guard('admin')->user());
 
                 @endif
-                <hr>
                 {{-- garis --}}
                 <a href="/logout" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold">
                     <i class="fas fa-power-off me-2"></i>Logout

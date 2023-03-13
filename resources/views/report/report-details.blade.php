@@ -36,37 +36,62 @@
                 @endforeach
             </div>
             <div class="text-center flex-1 dark:text-gray-400">
-            <h3 class="mb-8 font-semibold">Keterangan</h3>
-            <p class="text-gray-800 dark:text-gray-400">
-                @foreach ($report as $item)
-                    {{ $item->isi_laporan }}
-                @endforeach
-            </p>
-            <hr>
-                <h3 class="mb-8 font-semibold">Tanggapan</h3>
-                <p class="text-gray-800 dark:text-gray-400">
-                    @foreach ($report as $item)
-                    @foreach ($item->tanggapan as $ite)
-                    <div class="container">
-                        <div class="row d-flex justify-content-center">
-                            <div class="col-md-12 col-lg-10 col-xl-8">
-                            <div class="card my-3">
-                                <div class="card-body">
-                                    <p class="mt-3 mb-4 pb-2">
-                                        {{ $ite->tanggapan }}
-                                    </p>
-                                    <small>
-                                        {{ $ite->created_at->format('l, d F Y - H:i:s') }}
-                                    </small>
+                <h3 class="mb-8 font-semibold">Isi Laporan</h3>
+                <div class="bg-white">
+                    <p>
+                        @foreach ($report as $item)
+                        <div class="container">
+                            <div class="row d-flex justify-content-center">
+                                <div class="col-md-12 col-lg-10 col-xl-8">
+                                <div class="card my-3">
+                                    <div class="card-body">
+                                        <p class="mt-3 pb-2 fw-bold">
+                                            Masyarakat
+                                        </p>
+                                        <hr>
+                                        <p class="mt-3 mb-4 pb-2">
+                                            {{ $item->isi_laporan }}
+                                        </p>
+                                        <small>
+                                            {{ $item->created_at->format('l, d F Y - H:i:s') }}
+                                        </small>
+                                    </div>
+                                </div>
                                 </div>
                             </div>
+                        </div>
+                        @endforeach
+                    </p>
+                </div>
+                <hr>
+                    <h3 class="mb-8 font-semibold">Tanggapan</h3>
+                    <p class="text-gray-800 dark:text-gray-400">
+                        @foreach ($report as $item)
+                        @foreach ($item->tanggapan as $ite)
+                        <div class="container">
+                            <div class="row d-flex justify-content-center">
+                                <div class="col-md-12 col-lg-10 col-xl-8">
+                                <div class="card my-3">
+                                    <div class="card-body">
+                                        <p class="mt-3 pb-2 fw-bold">
+                                            Petugas
+                                        </p>
+                                        <hr>
+                                        <p class="mt-3 mb-4 pb-2">
+                                            {{ $ite->tanggapan }}
+                                        </p>
+                                        <small>
+                                            {{ $ite->created_at->format('l, d F Y - H:i:s') }}
+                                        </small>
+                                    </div>
+                                </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                        @endforeach
                     @endforeach
-                @endforeach
-                </p>
-            </div>
+                    </p>
+                </div>
             <hr>
             <div class="my-3 d-flex justify-content-center">
                 <a href="/report-finished-list" class="btn btn-danger">Kembali</a>
