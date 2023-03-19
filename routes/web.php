@@ -62,6 +62,8 @@ Route::middleware(['auth:admin,masyarakat', 'only_admin'])->group(function () {
     Route::get('report-decline-pdf', [PdfController::class, 'createDeclinePDF']);
     Route::get('pdf-list', [PdfController::class, 'list']);
     Route::get('report-pdf', [PdfController::class, 'createList']);
+    Route::get('report-all', [PdfController::class, 'allList']);
+
 });
 
 Route::middleware(['auth:admin,masyarakat', 'petugasadmin'])->group(function () {
