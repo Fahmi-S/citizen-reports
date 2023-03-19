@@ -17,7 +17,11 @@
                 @if (session('status'))
                     <div class="alert alert-success text-center">  
                         {{ session('message') }}
-                    </div>            
+                    </div>
+                @elseif(session('states'))
+                    <div class="alert alert-danger text-center">  
+                        {{ session('message') }}
+                    </div>
                 @endif
                 @if ($errors->any())
                     <div class="alert alert-danger">
@@ -43,16 +47,12 @@
                         </div>
 
                         <div class="form-check mb-3">
-                            <input class="form-check-input" type="checkbox" id="autoSizingCheck2">
-                            <label class="form-check-label">Remember Me</label>
+                            <input class="form-check-input" type="checkbox" onclick="myFunction()" id="autoSizingCheck2" value="{{ old('nama') }}">
+                            <label class="form-check-label">Show Password</label>
                         </div>
 
                         <div class="d-grid gap-2 mb-3">
                             <button type="submit" class="btn btn-dark btn-lg border-0 rounded-0">Login</button>
-                        </div>
-
-                        <div class="forgot-password-link mb-3 text-end">
-                            <a href="#" title="Forgot Password" class="text-decoration-none">Forgot Password?</a>
                         </div>
                     </form>
                     <div class="sign-up-accounts">
@@ -62,6 +62,16 @@
             </div>
         </div>
     </section>
+    <script>
+        function myFunction() {
+            var x = document.getElementById("floatingPassword");
+            if(x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+        }
+    </script>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 </body>

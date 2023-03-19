@@ -38,7 +38,7 @@ class AuthController extends Controller
         }
                 
         // Jika credentials/data tidak sesuai dengan yang ada di table munculkan error dan lempar kembali ke login
-        Session::flash('status', 'failed');
+        Session::flash('states', 'failed');
         Session::flash('message', 'Login Gagal / Tidak Ditemukan Data');
         return redirect('login');
     }
