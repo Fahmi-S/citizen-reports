@@ -61,7 +61,7 @@ class MasyarakatController extends Controller
             'nama'              => ['required', 'max:32'],
             'username'          => ['required', "unique:masyarakat,username,{$masyarakat->nik},nik", 'max:25'], 'unique:petugas',
             'image'             => ['mimes:jpg,png,jpeg'],
-            'password'          => ['required','min:3'],
+            // 'password'          => ['required','min:3'],
             'telp'              => ['required'],
         ]);
 
@@ -72,7 +72,13 @@ class MasyarakatController extends Controller
             $request['foto'] = $newName;
         }
 
-        $request['password'] = Hash::make($request->password);
+        if($request->password){
+            $request['password'] = Hash::make($request->password);
+        }else{
+            $request['password'] = $masyarakat->password;
+        }
+
+        
         $masyarakat->slug = null;
         $masyarakat->update($request->all());
         return redirect('masyarakat-list')->with('status', 'Data Berhasil Diubah!');

@@ -60,7 +60,7 @@ class PetugasController extends Controller
             'nama_petugas'      => ['required'],
             'username'          => ['required', 'max:20', "unique:petugas,username,{$petugas->id}", 'unique:masyarakat'],
             'image'             => ['mimes:jpg,png,jpeg'],
-            'password'          => ['required'],
+            // 'password'          => ['required'],
             'telp'              => ['required'],
             'level'             => ['required'],
         ]);
@@ -71,8 +71,12 @@ class PetugasController extends Controller
             $request->file('image')->storeAs('profile/petugas', $newName);
             $request['foto'] = $newName;
         }
-
-        $request['password'] = Hash::make($request->password);
+        if($request->password){
+            $request['password'] = Hash::make($request->password);
+        } else {
+            $request['password'] = $petugas->password;
+        }
+        
         $petugas->slug = null;
         $petugas->update($request->all());
         return redirect('petugas-list')->with('status', 'Data Berhasil Diubah!');
