@@ -58,6 +58,14 @@ class PdfController extends Controller
 
     public function createList()
     {
+        $report = Report::with('tanggapan')->where('status', null)->get();
+        view()->share('report', $report);
+        $pdf = PDF::loadView('report.pdf.report-pdf', ['report' => $report]);
+        return $pdf->stream("all-report-list", array("Attachment" => false));
+    }
+
+    public function allList()
+    {
         $report = Report::with('tanggapan')->get();
         view()->share('report', $report);
         $pdf = PDF::loadView('report.pdf.report-pdf', ['report' => $report]);

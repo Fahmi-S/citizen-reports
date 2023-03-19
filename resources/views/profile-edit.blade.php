@@ -8,7 +8,7 @@
         font-size: 13px;
     }
 </style>
-<h3 class="mb-4 text-center fs-1">Profile</h3>
+<h3 class="mb-4 text-center fs-1">Profile Settings</h3>
 <div class="mt-5">
     @if ($errors->any())
         <div class="alert alert-danger">

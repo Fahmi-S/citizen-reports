@@ -44,27 +44,4 @@
         </div>
     </div>
 </div>
-<div class="row my-5">
-    <h3 class="fs-4 mb-3">Logs</h3>
-    <div class="col">
-        <table class="table bg-white rounded shadow-sm table-hover">
-            <thead>
-                <tr>
-                    <th>No.</th>
-                    <th>Incoming Report</th>
-                    <th>Processing Report</th>
-                    <th>Decline Report</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>5</td>
-                    <td>8</td>
-                    <td>0</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
 @endsection

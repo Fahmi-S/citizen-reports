@@ -41,7 +41,7 @@ class ReportController extends Controller
 
     public function index()
     {
-        $report = Report::with('masyarakat')->orderBy('created_at', 'DESC')->paginate(10);
+        $report = Report::with('masyarakat')->where('status', null)->orderBy('created_at', 'DESC')->paginate(10);
         return view('report.report-list', ['report' => $report]);
     }
 

@@ -7,6 +7,13 @@
 
 <h3 class="text-center">Report Recent List</h3>
     
+<div class="mt-5">
+    @if(session('status'))
+        <div class="alert alert-success">
+            {{ session('status') }}
+        </div>
+    @endif
+</div>
 
     <div class="my-4 bg-white rounded shadow-sm table-hover table-responsive text-center">
         <div>

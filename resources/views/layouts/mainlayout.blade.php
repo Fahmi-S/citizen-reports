@@ -47,7 +47,7 @@
                         <i class="fa-solid fa-user-shield"> Report</i>
                     </h5>
                     <a href="/report-list" class="list-group-item list-group-item-action bg-transparent second-text fw-bold fs-7">
-                        <h6><li>Report List</li></h6>
+                        <h6><li>Incoming Report</li></h6>
                     </a>
                     <a href="/report-decline-list" class="list-group-item list-group-item-action bg-transparent second-text fw-bold fs-7">
                         <h6><li>Declined Report</li></h6>
@@ -80,10 +80,19 @@
                 @elseif(Auth::guard('admin')->user()->level == 'admin')
                     <hr>
                     <h6 class="list-group-item list-group-item-action bg-transparent second-text fw-bold fs-7 active">
-                        <i class="fa-solid fa-file-pdf"> Generate Report</i>
+                        <i class="fa-solid fa-file-pdf"> Generate PDF</i>
                     </h6>
-                    <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold fs-7">
-                        <h6><li>PDF</li></h6>
+                    <a href="/report-all" target="_blank" class="list-group-item list-group-item-action bg-transparent second-text fw-bold fs-7">
+                        <h6><li>Semua Laporan User</li></h6>
+                    </a>
+                    <a href="/report-decline-pdf" target="_blank" class="list-group-item list-group-item-action bg-transparent second-text fw-bold fs-7">
+                        <h6><li>Laporan Pengaduan Ditolak</li></h6>
+                    </a>
+                    <a href="/report-process-pdf" target="_blank" class="list-group-item list-group-item-action bg-transparent second-text fw-bold fs-7">
+                        <h6><li>Laporan Pengaduan Proses</li></h6>
+                    </a>
+                    <a href="/report-finished-pdf" target="_blank" class="list-group-item list-group-item-action bg-transparent second-text fw-bold fs-7">
+                        <h6><li>Laporan Pengaduan Selesai</li></h6>
                     </a>
                 @endif
 

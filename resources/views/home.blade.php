@@ -310,6 +310,4 @@
         </div>
     </div>
 </div>
-
-
 @endsection
