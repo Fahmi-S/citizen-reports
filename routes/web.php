@@ -22,10 +22,11 @@ use App\Http\Controllers\MasyarakatController;
 */
 
 Route::middleware(['only_guest'])->group(function () {
-    //Login Controllers
+    //Login
     Route::get('/login', [AuthController::class, 'index'])->name('login');
     Route::post('/login', [AuthController::class, 'authenticating']);
 
+    // Register 
     Route::get('/register', [AuthController::class, 'register']);
     Route::post('register', [AuthController::class, 'registerProcess']);
 });
@@ -33,6 +34,7 @@ Route::middleware(['only_guest'])->group(function () {
 Route::middleware(['auth:admin,masyarakat', 'only_admin'])->group(function () {
     //Dashboard
     Route::get('dashboard', [DashboardController::class, 'index']);
+
     //Petugas Crud
     Route::get('petugas-list', [PetugasController::class, 'index']);
     Route::get('petugas-add', [PetugasController::class, 'add']);
@@ -43,6 +45,7 @@ Route::middleware(['auth:admin,masyarakat', 'only_admin'])->group(function () {
     Route::get('petugas-destroy/{slug}', [PetugasController::class, 'destroy']);
     Route::get('petugas-deleted', [PetugasController::class, 'deletedPetugas']);
     Route::get('petugas-restore/{slug}', [PetugasController::class, 'restore']);
+
     //Masyarakat Crud
     Route::get('masyarakat-list', [MasyarakatController::class, 'index']);
     Route::get('masyarakat-add', [MasyarakatController::class, 'add']);
@@ -53,6 +56,7 @@ Route::middleware(['auth:admin,masyarakat', 'only_admin'])->group(function () {
     Route::get('masyarakat-destroy/{slug}', [MasyarakatController::class, 'destroy']);
     Route::get('masyarakat-deleted', [MasyarakatController::class, 'deletedMasyarakat']);
     Route::get('masyarakat-restore/{slug}', [MasyarakatController::class, 'restore']);
+
     //Report PDF
     Route::get('pdf-finished', [PdfController::class, 'finishedList']);
     Route::get('report-finished-pdf', [PdfController::class, 'createFinishedPDF']);
@@ -69,6 +73,7 @@ Route::middleware(['auth:admin,masyarakat', 'only_admin'])->group(function () {
 Route::middleware(['auth:admin,masyarakat', 'petugasadmin'])->group(function () {
     //Report Status Null / Belum diverval
     Route::get('report-list', [ReportController::class, 'index']);
+
     //Report Status "0" / Ditolak
     Route::get('report-decline-list', [ReportController::class, 'declineList']);
 
@@ -91,21 +96,20 @@ Route::middleware(['auth:admin,masyarakat', 'petugasadmin'])->group(function () 
 });
 
 Route::middleware(['auth:admin,masyarakat'])->group(function () {
-    
-    Route::get('/', function () {
-    return view('welcome');
-    });
     //Profile
     Route::get('profile', [ProfileController::class, 'index']);
     Route::get('profile-edit', [ProfileController::class, 'edit']);
     Route::put('profile-edit', [ProfileController::class, 'update']);
+
     //Logout
     Route::get('logout', [AuthController::class, 'logout']);
+
     //Report
     Route::get('report-add', [ReportController::class, 'add'])->middleware('only_masyarakat');
     Route::post('report-add', [ReportController::class, 'store'])->middleware('only_masyarakat');
     Route::get('recent-report', [ReportController::class, 'recent'])->middleware('only_masyarakat');
-    Route::get('report-recent-detail/{id}', [ReportController::class, 'recentDetail']);
+    Route::get('report-recent-detail/{id}', [ReportController::class, 'recentDetail'])->middleware('only_masyarakat');
+
     //Home
     Route::get('home', [HomeController::class, 'index']);
 });

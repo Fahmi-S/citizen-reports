@@ -44,7 +44,7 @@ class MasyarakatController extends Controller
         $request['foto'] = $newName;
         $request['password'] = Hash::make($request->password);
         $masyarakat = Masyarakat::create($request->all());
-        return redirect('masyarakat-list')->with('status', 'Data Berhasil Ditambahkan!');
+        return redirect('masyarakat-list')->with('status', 'Data Masyarakat Berhasil Ditambahkan!');
     }
 
     public function edit($slug)
@@ -81,7 +81,7 @@ class MasyarakatController extends Controller
         
         $masyarakat->slug = null;
         $masyarakat->update($request->all());
-        return redirect('masyarakat-list')->with('status', 'Data Berhasil Diubah!');
+        return redirect('masyarakat-list')->with('status', 'Data Masyarakat Berhasil Diubah!');
     }
     
     public function delete($slug)
@@ -94,7 +94,7 @@ class MasyarakatController extends Controller
     {
         $masyarakat = Masyarakat::whereSlug($slug)->first();
         $masyarakat->delete();
-        return redirect('masyarakat-list')->with('status', 'Data Berhasil Dihapus!');
+        return redirect('masyarakat-list')->with('status', 'Data Masyarakat Berhasil Dihapus!');
     }
 
     public function deletedMasyarakat()
@@ -107,6 +107,6 @@ class MasyarakatController extends Controller
     {
         $masyarakat = Masyarakat::withTrashed()->whereSlug($slug)->first();
         $masyarakat->restore();
-        return redirect('masyarakat-list')->with('status', 'Data Berhasil Dikembalikan!');
+        return redirect('masyarakat-list')->with('status', 'Data Masyarakat Berhasil Dikembalikan!');
     }
 }

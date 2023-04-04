@@ -51,7 +51,7 @@
 <br>
 
 <body>
-	<h1>Report Decline List</h1>
+	<h1>Report Process List</h1>
 	<div class="container">
 		<div>
 			<table class="table">

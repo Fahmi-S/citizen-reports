@@ -63,17 +63,17 @@ class ReportController extends Controller
             $id = Report::findOrFail($id);
             $id->status = '0';
             $id->update();
-            return redirect('report-decline-list')->with('status', 'Data Berhasil Diubah');
+            return redirect('report-decline-list')->with('status', 'Laporan Terverifikasi');
         }elseif($request->input('action') == 'proses'){
             $id = Report::findOrFail($id);
             $id->status = 'proses';
             $id->update();
-            return redirect('report-process-list')->with('status', 'Data Berhasil Diubah');
+            return redirect('report-process-list')->with('status', 'Laporan Terverifikasi');
         }elseif($request->input('action') == 'selesai'){
             $id = Report::findOrFail($id);
             $id->status = 'selesai';
             $id->update();
-            return redirect('report-finished-list')->with('status', 'Data Berhasil Diubah');
+            return redirect('report-finished-list')->with('status', 'Laporan Terverifikasi');
         }
         
         // $validated = $request->validate([
@@ -124,7 +124,7 @@ class ReportController extends Controller
             'tanggapan'         => $request['tanggapan'],
             'id_petugas'        => Auth::guard('admin')->user()->id,
         ]);
-        return redirect('report-process-list')->with('status', 'Data Berhasil Diproses');
+        return redirect('report-process-list')->with('status', 'Tanggapan Berhasil Ditambahkan');
         // if($request['status'])
         // {
         //     $validated = $request->validate([

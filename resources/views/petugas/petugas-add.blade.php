@@ -33,7 +33,7 @@
 
                 <div class="form-floating mb-3">
                     <input type="password" name="password" class="form-control rounded-0" id="floatingPassword" placeholder="Password...">
-                    <label for="floatingPassword">New Password</label>
+                    <label for="floatingPassword">Password</label>
                 </div>
 
                 <div class="form-floating mb-3">

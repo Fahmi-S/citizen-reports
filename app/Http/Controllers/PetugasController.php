@@ -44,7 +44,7 @@ class PetugasController extends Controller
         $request['foto'] = $newName;
         $request['password'] = Hash::make($request->password);
         $petugas = Petugas::create($request->all());
-        return redirect('petugas-list')->with('status', 'Data Berhasil Ditambahkan!');
+        return redirect('petugas-list')->with('status', 'Data Petugas Berhasil Ditambahkan!');
     }
 
     public function edit($slug)
@@ -79,7 +79,7 @@ class PetugasController extends Controller
         
         $petugas->slug = null;
         $petugas->update($request->all());
-        return redirect('petugas-list')->with('status', 'Data Berhasil Diubah!');
+        return redirect('petugas-list')->with('status', 'Data Petugas Berhasil Diubah!');
     }
 
     public function delete($slug)
@@ -92,7 +92,7 @@ class PetugasController extends Controller
     {
         $petugas = Petugas::where('slug', $slug)->first();
         $petugas->delete();
-        return redirect('petugas-list')->with('status', 'Data Berhasil Dihapus!');
+        return redirect('petugas-list')->with('status', 'Data Petugas Berhasil Dihapus!');
     }
 
     public function deletedPetugas()
@@ -105,6 +105,6 @@ class PetugasController extends Controller
     {
         $petugas = Petugas::withTrashed()->where('slug', $slug)->first();
         $petugas->restore();
-        return redirect('petugas-list')->with('status', 'Data Berhasil DiKembalikan!');
+        return redirect('petugas-list')->with('status', 'Data Petugas Berhasil DiKembalikan!');
     }
 }

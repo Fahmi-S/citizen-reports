@@ -9,13 +9,13 @@
             Detail Pengaduan
         </h2>
         
-        @if (Auth::guard('admin')->user()->level == 'admin')
+        {{-- @if (Auth::guard('admin')->user()->level == 'admin')
             <div class="d-flex justify-content-center my-2">
                 <button class="btn btn-danger">Export To PDF</button>
             </div>
         @else
         
-        @endif
+        @endif --}}
         
         <div class="px-4 py-3 mb-8 flex text-gray-800 bg-white rounded-lg shadow-md dark:bg-gray-800">
             <hr>
